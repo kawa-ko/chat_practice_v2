@@ -1,0 +1,8 @@
+<div class="message-content">
+	<p>
+	    <%= message.content %>
+	</p>
+	<% if message.image? %>
+	    <%= image_tag message.image.url, class: 'message-image' %>
+	<% end %>
+</div>

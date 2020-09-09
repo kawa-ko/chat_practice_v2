@@ -1,0 +1,302 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'reset';
+
+//共通CSS
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(-70deg, #b22328, #cb6444, #E4A265, #FFDA94, #fff);
+   height: 100vh;
+   position: relative;
+   font-size: 62.5%;
+   color: #333;
+   font-family: 'Arial','Hiragino Maru Gothic ProN W4','	Hiragino Maru Gothic Pro W4',sans-serif;
+}
+
+a:link,a:visited,a:hover,a:active{
+   text-decoration: none;
+   color: #333;
+}
+
+.clearfix::after{
+   clear: both;
+}
+
+.wrapper{
+    height: 100%;
+    overflow: visible;
+}
+//共通ｃｓｓ終わり
+
+//pc用css
+.header{
+    width: 20%;
+    background: linear-gradient(45deg, #79ffd2, #91DDC1, #91e1ec, #72b3ff);
+    float: left;
+    height: 100vh;
+    position: fixed;
+    .header-right{
+        padding: 20px;
+        .header-logo-title{
+            color: #fff;
+            text-shadow: 2px 2px 2px #ddd;
+            text-decoration: none;
+            font-size: 2rem;
+        }
+    }
+    .header-left{
+        padding: 0 20px;
+        .header-nav{
+            .header-nav-list{
+                list-style: none;
+                .header-nav-item{
+                    padding: 0 15px;
+                    a{
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.main{
+    height: 100%;
+    width: 80%;
+    float: right;
+    overflow-y: scroll;
+    .message-list{
+        padding: 30px 50px 120px;
+        .message-content{
+            background-color: #fff;
+            border-radius: 40px;
+            padding: 20px 30px;
+            margin-bottom: 40px;
+            word-wrap: break-word;
+            box-shadow: 2px 2px 8px 2px#666;
+            .message-image{
+                margin-top: 20px;
+                max-width: 200px;
+                border-radius: 10px;
+            }
+        }
+    }
+    .form-area{
+        width: 80%;
+        position: fixed;
+        bottom: 0;
+        background-color: #444;
+        padding: 30px 40px;
+        form{
+            width: 100%;
+            display: flex;
+            .textarea-up{
+                width: 5%;
+                padding: 5px 10px;
+                border-radius: 5px;
+                height: 40px;
+                background-color: #2e8b57;
+                text-align: center;
+                color: #fff;
+                font-size: 1.4rem;
+                cursor: pointer;
+                transition: transform .3s, opacity .3s;
+                &.open{
+                    transform: rotate(180deg);
+                }
+                &:hover{
+                    opacity: 0.7;
+                }    
+            }
+            .message-input{
+                width: calc(70% - 20px);
+                margin-left: 20px;
+                border-radius: 10px;
+                background-color: #fff;
+                .flex-textarea{
+                    position: relative;
+                    font-size: 1.3rem;
+                    .textarea-dummy{
+                        white-space: pre-wrap;
+                        word-wrap: break-word;
+                        visibility: hidden;
+                        min-height: 40px;
+                        max-height: 400px;
+                        padding: 5px 15px;
+                    }
+                    .auto-resize{
+                        outline: none;
+                        background-color: transparent;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                        padding: 5px 15px;
+                        display: block;
+                        border-radius: 10px;
+                        resize: none;
+                    }
+                }
+                .image-preview-area{
+                    display: none;
+                    .img-wrapper{
+                        max-width: 400px;
+                        margin: 0 auto 20px;
+                        position: relative;
+                        .close{
+                            position: absolute;
+                            top: 15px;
+                            left: 20px;
+                            background-color: rgba(0,0,0,0.7);
+                            border-radius: 50%;
+                            width: 30px;
+                            height: 30px;
+                            color: #fff;
+                            cursor: pointer;
+                            &:hover{
+                                opacity: 0.7;
+                            }
+                        }
+                        img{
+                            width: 100%;
+                            border-radius: 10px;
+                        }
+                    }
+                }
+            }
+            .image-input{
+                width: calc(15% - 5px);
+                margin-left: 5px;
+                input{
+                    display: none;
+                }
+                label{
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    cursor: pointer;
+                    display: block;
+                    font-size: 1rem;
+                    background-color: #ffa357;
+                    border-radius: 8px;
+                    color: #fff;
+                }
+            }
+            .submit-btn{
+                width: calc(15% - 10px);
+                margin-left: 10px;
+                input{
+                    display: block;
+                    height: 40px;
+                    width: 100%;
+                    line-height: 40px;
+                    font-size: 1.2rem;
+                    color: #fff;
+                    border-radius: 10px;
+                    background-color: #b44a2a;
+                }
+            }
+        }
+    }
+}
+
+//タブレット用css
+@media screen and (max-width: 1024px){
+    .header{
+        width: 100%;
+        float: none;
+        top: 0;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .header-right{
+            display: inline-block;
+        }
+        .header-left{
+            display: inline-block;
+            .header-nav{
+                .header-nav-list{
+                    display: flex;
+                }
+            }
+        }
+    }
+    .main{
+        width: 100%;
+        .message-list{
+            padding-top: 100px;
+        }
+        .form-area{
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 760px){
+    .header{
+        .header-right{
+            .header-logo-title{
+                font-size: 1.5rem;
+            }
+        }
+        .header-left{
+            .header-nav{
+                .header-nav-list{
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+    .main{
+        .message-list{
+            padding: 100px 20px 120px;
+        }
+        .form-area{
+            padding: 20px 10px;
+            form{
+                .textarea-up{
+                    font-size: 1.2rem;
+                    width: 10%;
+                }
+                .message-input{
+                    width: calc(60% - 5px);
+                    margin-left: 5px;
+                }
+                .image-input{
+                    width: calc(15% - 5px);
+                    margin-left: 5px;
+                    font-size: 1rem;
+                    overflow: hidden;
+                }
+                .submit-btn{
+                    width: calc(15% - 5px);
+                    margin-left: 5px;
+                    .submit{
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

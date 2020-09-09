@@ -7,9 +7,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/jquery-autosize@1.18.18/jquery.autosize.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="wrapper clearfix">
+      <%= render 'layouts/header.html.erb' %>
+      <%= yield %>
+    </div>
   </body>
 </html>

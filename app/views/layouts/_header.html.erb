@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="header-right">
+    <%= link_to 'Chat_practice', root_path, class: 'header-logo-title' %>
+  </div>
+
+  <div class="header-left">
+    <nav class="header-nav">
+      <ul class="header-nav-list">
+        <li class="header-nav-item">
+          <%= link_to 'ユーザー登録', new_user_registration_path, class: 'signup-link' %>
+        </li>
+        <li class="header-nav-item">
+          <%= link_to 'ログイン', new_user_session_path, class: 'login-link' %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

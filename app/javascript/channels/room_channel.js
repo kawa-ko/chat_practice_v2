@@ -1,6 +1,7 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("RoomChannel", {
+document.addEventListener('turbolinks:load',function(){
+consumer.subscriptions.create({ channel: "RoomChannel", room: document.getElementById('message-container').dataset.room}, {
   connected() {
     console.log('connected')
     // Called when the subscription is ready for use on the server
@@ -25,4 +26,5 @@ consumer.subscriptions.create("RoomChannel", {
     const messageList = $('.message-list');
     $('.main').animate({scrollTop: messageList[0].scrollHeight},300);
   }
+});
 });

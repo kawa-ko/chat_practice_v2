@@ -1,3 +1,89 @@
 // Place all the styles related to the Rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+//ルーム作成画面の画像設定フォームのcss
+#room_image{
+    display: none;
+}
+.room-img-prev{
+    margin-bottom: 30px;
+    img{
+        width: 30vh;
+        height: 30vh;
+        border-radius: 10px;
+        margin: 0 auto 15px;
+        object-fit: cover;
+        display: block;
+        box-shadow: 3px 3px 3px 2px #aaa;
+    }
+    .img-delete{
+        .img-delete-check{
+            display: inline-block;
+            vertical-align: middle;
+            width: auto;
+            height: auto;
+            margin: 0;
+        }
+        .img-delete-text{
+            vertical-align: middle;
+            display: inline-block;
+        }
+    }
+}
+
+
+//ルーム一覧画面のルームを表示するためのカード用のcss
+.rooms{
+    padding: 30px;
+    .room-list{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        .room{
+            width: 20%;
+            padding: 15px;
+            .room-card{
+                border: none;
+                height: 200px;
+                position: relative;
+                text-align: center;
+                box-shadow: 1px 2px 3px 2px #bbb;
+                border-radius: 10px;
+                overflow: hidden;
+                .image-area{
+                    height: 50%;
+                    background-color: #ddd;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        object-fit: cover;
+                    }
+                }
+                .room-name{
+                    padding: 10px 0;
+                    font-size: 1.3rem;
+                }
+                .enter-btn{
+                    display: inline-block;
+                    position: absolute;
+                    bottom: 15px;
+                    left: 50%;
+                    color: #fff;
+                    border-radius: 5px;
+                    padding: 5px 15px;
+                    background-color: #7abadd;
+                    box-shadow: 0 2px 0 0 #619ab9;
+                    transform: translateX(-50%);
+                    transition: opacity .2s, transform .2s, box-shadow .2s;
+                    &:hover{
+                        transform: translateX(-50%) translateY(2px);
+                        box-shadow: none;
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+    }
+}

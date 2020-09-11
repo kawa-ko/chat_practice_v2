@@ -1,0 +1,19 @@
+<div class="rooms">
+  <ul class="room-list">
+    <% rooms.each do |room| %>
+      <li class="room">
+        <div class="room-card">
+          <div class="image-area">
+            <% if room.image? %>
+              <%= image_tag room.image.url %>
+            <% end %>
+          </div>
+          <h3 class="room-name">
+            <%= room.name %>
+          </h3>
+          <%= link_to '参加', room_path(room), class: 'enter-btn' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

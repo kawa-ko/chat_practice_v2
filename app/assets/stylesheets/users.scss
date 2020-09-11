@@ -5,7 +5,7 @@
     width: 80%;
     margin: 0 auto;
     padding: 50px 50px 30px;
-    .user-heading{
+    .heading{
         text-align: center;
         font-size: 2rem;
     }
@@ -104,5 +104,36 @@
                 }
             }
         }
+    }
+}
+
+//show
+.user-desc-wrapper{
+    text-align: center;
+    padding: 40px;
+    .user-thumb{
+        width: 30vh;
+        height: 30vh;
+        border-radius: 50%;
+        box-shadow: 2px 2px 4px 2px #bbb;
+        overflow: hidden;
+        margin: 0 auto 30px;
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .user-name{
+        font-size: 2rem;
+        padding-bottom: 30px;
+        margin-bottom: 40px;
+        border-bottom: 2px dashed #90ddcb;
+    }
+    .host-rooms{
+        display: inline-block;
+        padding-left: 15px;
+        border-left: 10px solid navy;
+        font-size: 1.7rem;
     }
 }

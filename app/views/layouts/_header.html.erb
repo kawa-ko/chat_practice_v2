@@ -1,12 +1,31 @@
 <header class="header">
-  <div class="header-right">
+  <div class="header-top">
     <%= link_to 'Chat_practice', root_path, class: 'header-logo-title' %>
+      <% if logged_in? %>
+        <%= link_to(user_path(current_user)) do %>
+          <div class="user-icon">
+            <div class="user-img-area">
+              <% if current_user.image? %>
+                <%= image_tag current_user.image.url %>
+              <% else %>
+                <%= image_tag  '1907765.jpg' %>
+              <% end %>
+            </div>
+            <p class="user-name">
+              <%= current_user.name %>
+            </p>
+          </div>
+        <% end %>
+      <% end %>
   </div>
 
-  <div class="header-left">
+  <div class="header-bottom">
     <nav class="header-nav">
       <ul class="header-nav-list">
         <% if logged_in? %>
+          <li class="header-nav-item">
+            <%= link_to 'ルーム作成', new_room_path %>
+          </li>
           <li class="header-nav-item">
             <a href="/logout" data-method="delete">ログアウト</a>
           </li>
@@ -52,6 +71,9 @@
         </p>
       </div>
       <ul>
+        <li class="sp-nav-item">
+          <%= link_to 'ルーム作成', new_room_path %>
+        </li>
         <li class="sp-nav-item">
           <i class="fas fa-sign-out-alt icon"></i>
           <%= link_to 'ログアウト', logout_path, method: :delete %>

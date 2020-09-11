@@ -1,9 +1,36 @@
-<div class="message-list" id="message-container">
+<div class="room-header">
+  <h2 class="room-name">
+    <%= @room.name %>
+  </h2>
+  <div class="room-menu">
+    <button class="room-menu-btn">
+      <i class="fas fa-ellipsis-v"></i>
+    </button>
+    <nav class="room-nav">
+      <ul>
+        <% if @room.host_id = current_user.id %>
+          <li>
+            <%= link_to 'ルームを編集', edit_room_path(@room) %>
+          </li>
+          <li>
+            <%= link_to 'ルームを削除', room_path(@room), method: :delete %>
+          </li>
+        <% end %>
+        <li>
+          <a href="#">メンバー一覧</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="message-list" id="message-container" data-room=<%= @room.id %>>
   <%= render @messages %>
 </div>
 
 <div class="form-area">
   <%= form_with(model: @message) do |f| %>
+    <%= f.hidden_field :room_id %>
 
     <div class="message-input">
       <div class="flex-textarea">
@@ -36,5 +63,14 @@
     const main = document.querySelector('.main');
     const scrollHeight = messageList.scrollHeight;
     main.scrollTop = scrollHeight;
+
+    const roomNav = $('.room-nav');
+    $('.room-menu-btn').click(function(){
+      if(roomNav.hasClass('show')){
+        roomNav.removeClass('show');
+      }else{
+        roomNav.addClass('show');
+      }
+    });
   });
 </script>

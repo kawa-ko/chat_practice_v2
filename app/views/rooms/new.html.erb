@@ -1,0 +1,74 @@
+<div class="form-wrapper">
+  <h2 class="heading">ルーム作成</h2>
+  <%= form_with model: @room, class: 'form', local: true do |f| %>
+    <%= f.label :name,'ルーム名'%>
+    <%= f.text_field :name %>
+
+    <%= f.hidden_field :host_id %>
+
+    <%= f.label :image,'ルーム画像'%>
+    <%= f.label :image, '画像を選択', class: 'dummy-file-input' %>
+    <%= f.file_field :image %>
+    
+    <div class="room-img-prev">
+      <%= image_tag '1907765.jpg' %>
+      <div class="img-delete">
+          <%= f.check_box :remove_image, class: 'img-delete-check'%>
+          <p class='img-delete-text'>画像を削除する</p>
+      </div>
+    </div>
+
+    <%= f.submit '送信', class: 'submit-btn'%>
+
+  <% end %>
+
+</div>
+
+<script>
+  const previewedRoomImg = $('.room-img-prev').find('img');
+  const roomImgInput = $('#room_image');
+  const roomDeleteBtn = $('.img-delete-check');
+  const roomDeleteArea = $('.img-delete');
+   
+  //画像を設定してない状態から、画像を設定する時に削除ボタンを表示するための関数
+  const setDlt = function(){
+       if(roomImgInput.prop('files')[0] === undefined){
+           roomDeleteArea.hide();
+       }else{
+           roomDeleteArea.show();
+       }
+   }
+
+   setDlt();
+
+   //ファイルフィールドのファイルを読み込むためのファンクション
+   const setSrc = function(file){
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(){
+      const prevImg = reader.result;
+      previewedRoomImg.attr('src',prevImg);
+      setDlt();
+    }
+   };
+
+   //ユーザー作成、編集でプレビューされていたプロフィール画像を削除する処理
+   roomDeleteBtn.on('change',function(){
+       if($(this).is(':checked')){
+           previewedRoomImg.attr('src','/assets/1907765-2d19da0a355a5bbac0ca36d05dc3a50a835240adba02f9712931105f4be94086.jpg');
+       }else{
+           const file = roomImgInput.prop('files')[0];
+           if(file !== undefined){
+             setSrc(file);
+           }else{
+               return;
+           }
+       }
+   });
+
+   //プロフィール画像のプレビュー処理
+   roomImgInput.on('change',function(e){
+     const file = e.target.files[0];
+     setSrc(file);
+   });
+</script>

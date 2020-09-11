@@ -27,6 +27,8 @@ gem 'devise-i18n'
 
 gem 'carrierwave'
 gem 'rmagick'
+
+gem 'pry-byebug', group: :development
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

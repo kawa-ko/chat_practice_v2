@@ -1,0 +1,8 @@
+<div class="form-wrapper">
+  <h2 class="user-heading">ユーザー登録</h2>
+  <div class="form">
+    <%= form_with model: @user, local: true do |f|%>
+      <%= render 'user-form.html.erb', f: f%>
+    <% end %>
+  </div>
+</div>

@@ -12,6 +12,7 @@ consumer.subscriptions.create("RoomChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
+    console.log('received');
     const template = data['message'];
     const imageInput = document.getElementById('message_image');
     const messageContainer = document.getElementById('message-container');
@@ -20,5 +21,8 @@ consumer.subscriptions.create("RoomChannel", {
     messageContainer.insertAdjacentHTML('beforeend',template);
     inputform.value = "";
     imageInput.value = "";
+
+    const messageList = $('.message-list');
+    $('.main').animate({scrollTop: messageList[0].scrollHeight},300);
   }
 });

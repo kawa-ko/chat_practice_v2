@@ -22,7 +22,6 @@
 }
 
 body{
-    background: linear-gradient(-70deg, #b22328, #cb6444, #E4A265, #FFDA94, #fff);
    height: 100vh;
    position: relative;
    font-size: 62.5%;
@@ -63,19 +62,32 @@ a:link,a:visited,a:hover,a:active{
     }
     .header-left{
         padding: 0 20px;
+        margin: 20px 0;
         .header-nav{
             .header-nav-list{
                 list-style: none;
                 .header-nav-item{
                     padding: 0 15px;
+                    margin: 10px 0;
                     a{
+                        font-size: 1.3rem;
                         text-decoration: none;
                         color: #fff;
+                        &:hover{
+                            opacity: 0.7;
+                        }
                     }
                 }
             }
         }
     }
+    .sp-hamburger{
+        display: none;
+    }
+}
+
+.sp-menu{
+    display: none;
 }
 
 
@@ -86,17 +98,42 @@ a:link,a:visited,a:hover,a:active{
     overflow-y: scroll;
     .message-list{
         padding: 30px 50px 120px;
-        .message-content{
-            background-color: #fff;
-            border-radius: 40px;
-            padding: 20px 30px;
-            margin-bottom: 40px;
-            word-wrap: break-word;
-            box-shadow: 2px 2px 8px 2px#666;
-            .message-image{
-                margin-top: 20px;
-                max-width: 200px;
-                border-radius: 10px;
+        .message-container{
+            .message-content{
+                background-color: #fff;
+                border-radius: 20px;
+                display: inline-block;
+                padding: 20px 15px;
+                margin-bottom: 40px;
+                word-wrap: break-word;
+                box-shadow: 2px 2px 8px 2px#aaa;
+                .user-prof{
+                    margin-bottom: 10px;
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        margin-right: 10px;
+                        vertical-align: middle;
+                        object-fit: cover;
+                        object-position: top;
+                        box-shadow: 2px 1px 3px 2px #bbb;
+                    }
+                    .message-user-name{
+                        font-size: 1rem;
+                        color: #666;
+                        display: inline-block;
+                    }
+                }
+                .content{
+                    font-size: 1.2rem;
+                }
+                .message-image{
+                    margin-top: 20px;
+                    max-width: 200px;
+                    border-radius: 10px;
+                }
             }
         }
     }
@@ -222,7 +259,11 @@ a:link,a:visited,a:hover,a:active{
 
 //タブレット用css
 @media screen and (max-width: 1024px){
+    body{
+        padding-top: 77px;
+    }
     .header{
+        position: fixed;
         width: 100%;
         float: none;
         top: 0;
@@ -234,26 +275,157 @@ a:link,a:visited,a:hover,a:active{
             display: inline-block;
         }
         .header-left{
-            display: inline-block;
-            .header-nav{
-                .header-nav-list{
-                    display: flex;
+            display: none;
+        }
+    }
+
+    .sp-hamburger{
+        display: block;
+        margin: 10px;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 20;
+        .hamburger-bar{
+            width: 100%;
+            height: 4px;
+            z-index: 30;
+            position: absolute;
+            background-color: #fff;
+            transition: opacity .3s, transform .3s, background-color .3s;
+            &:nth-of-type(1){
+                top: 0;
+            }
+            &:nth-of-type(2){
+                top: 18px;
+            }
+            &:nth-of-type(3){
+                bottom: 0;
+            }
+        }
+        &.open{
+            .hamburger-bar{
+                background-color: #333;
+                &:nth-of-type(1){
+                    transform: translateY(18px) rotate(45deg);
+                }
+                &:nth-of-type(2){
+                    opacity: 0;
+                }
+                &:nth-of-type(3){
+                    transform: translateY(-18px) rotate(-45deg);
                 }
             }
         }
     }
+
+    .sp-menu{
+        display: block;
+        position: fixed;
+        overflow: auto;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        padding: 50px;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        transform: translateX(100%);
+        background-color: #fff;
+        transition: opacity .3s, transform .3s;
+        .sp-nav{
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+            transition: transform .3s, opacity .3s;
+            transition-delay: .3s;
+            opacity: 0;
+            .user-icon{
+                border-bottom: 1px skyblue dashed;
+                padding-bottom: 50px;
+                .user-img-area{
+                    margin: 0 auto;
+                    width: 30vw;
+                    height: 30vw;
+                    border-radius: 50%;
+                    box-shadow: 2px 2px 3px 1px #aaa;
+                    overflow: hidden;
+                    img{
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .user-name{
+                    margin-top: 15px;
+                    font-size: 4rem;
+                }
+            }
+            ul{
+                list-style: none;
+                margin-top: 80px;
+                .sp-nav-item{
+                    opacity: 0;
+                    margin-top: 30px;
+                    font-size: 2rem;
+                    transform: translateX(40px);
+                    transition: opacity .3s,transform .3s;
+                    transition-delay: .5s;
+                    &:nth-of-type(2){
+                        transition-delay: .6s;
+                    }
+                    a{
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+        &.show{
+            opacity: 1;
+            transform: translateX(0);
+            .sp-nav{
+                opacity: 1;
+                transform: translateY(10%);
+                ul{
+                    .sp-nav-item{
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            }
+        }
+    }
+
     .main{
         width: 100%;
         .message-list{
-            padding-top: 100px;
+            padding: 0 50px 80px;
         }
         .form-area{
             width: 100%;
+            form{
+                .message-input{
+                    width: 70%;
+                    margin: 0;
+                }
+                .image-input{
+                    width: calc(15% - 10px);
+                    margin-left: 10px;
+                }
+                .submit-btn{
+                    width: calc(15% - 10px);
+                    margin-left: 10px;
+                }
+            }
         }
     }
 }
 
 @media screen and (max-width: 760px){
+    body{
+        padding-top: 68px;
+    }
     .header{
         .header-right{
             .header-logo-title{
@@ -268,6 +440,22 @@ a:link,a:visited,a:hover,a:active{
             }
         }
     }
+    .sp-menu{
+        .sp-nav{
+            width: auto;
+            .user-icon{
+                padding-bottom: 20px;
+               .user-name{
+                   font-size: 2rem;
+               }
+            }
+            ul{
+                .sp-nav-item{
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
     .main{
         .message-list{
             padding: 100px 20px 120px;
@@ -275,23 +463,10 @@ a:link,a:visited,a:hover,a:active{
         .form-area{
             padding: 20px 10px;
             form{
-                .textarea-up{
-                    font-size: 1.2rem;
-                    width: 10%;
-                }
-                .message-input{
-                    width: calc(60% - 5px);
-                    margin-left: 5px;
-                }
                 .image-input{
-                    width: calc(15% - 5px);
-                    margin-left: 5px;
                     font-size: 1rem;
-                    overflow: hidden;
                 }
                 .submit-btn{
-                    width: calc(15% - 5px);
-                    margin-left: 5px;
                     .submit{
                         font-size: 1rem;
                     }

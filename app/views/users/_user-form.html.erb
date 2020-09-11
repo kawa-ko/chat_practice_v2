@@ -1,0 +1,84 @@
+<%= f.label :name,'名前'%>
+<%= f.text_field :name %>
+
+<%= f.label :image,'プロフィール画像'%>
+<%= f.label :image, '画像を選択', class: 'dummy-file-input' %>
+<%= f.file_field :image , class: 'prof-img-input'%>
+    
+<div class="prof-img-prev">
+    <% if logged_in? %>
+      <% if current_user.image? %>
+        <%= image_tag current_user.image.url, class: 'logged-in-img'%>
+      <% else %>
+        <%= image_tag '1907765.jpg' %>
+      <% end %>
+    <% else %>
+      <%= image_tag '1907765.jpg' %>
+    <% end %>
+        
+    <div class="img-delete">
+        <%= f.check_box :remove_image, class: 'img-delete-check'%>
+        <p class='img-delete-text'>画像を削除する</p>
+    </div>
+</div>
+
+<%= f.label 'メールアドレス'%>
+<%= f.email_field :email %>
+
+<%= f.label 'パスワード'%>
+<%= f.password_field :password %>
+
+<%= f.label 'パスワード（確認用)' %>
+<%= f.password_field :password_confirmation %>
+
+<%= f.submit '送信', class: 'submit-btn'%>
+
+<script>
+  const previewedImg = $('.prof-img-prev').find('img');
+  const profImgInput = $('.prof-img-input');
+  const deleteBtn = $('.img-delete-check');
+  const deleteArea = $('.img-delete');
+   
+  //画像を設定してない状態から、画像を設定する時に削除ボタンを表示するための関数
+  const setDlt = function(){
+       if(profImgInput.prop('files')[0] === undefined){
+           deleteArea.hide();
+       }else{
+           deleteArea.show();
+       }
+   }
+
+   setDlt();
+
+   //ファイルフィールドのファイルを読み込むためのファンクション
+   const setSrc = function(file){
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(){
+      const prevImg = reader.result;
+      previewedImg.attr('src',prevImg);
+      setDlt();
+    }
+   };
+
+   //ユーザー作成、編集でプレビューされていたプロフィール画像を削除する処理
+   deleteBtn.on('change',function(){
+       if($(this).is(':checked')){
+           previewedImg.attr('src','/assets/1907765-2d19da0a355a5bbac0ca36d05dc3a50a835240adba02f9712931105f4be94086.jpg');
+       }else{
+           const file = profImgInput.prop('files')[0];
+           if(file !== undefined){
+             setSrc(file);
+           }else{
+               console.log('unko');
+               return;
+           }
+       }
+   });
+
+   //プロフィール画像のプレビュー処理
+   profImgInput.on('change',function(e){
+     const file = e.target.files[0];
+     setSrc(file);
+   });
+</script>

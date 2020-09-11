@@ -1,34 +1,40 @@
-<div class="main">
-  <div class="message-list" id="message-container">
-      <%= render @messages %>
-  </div>
-
-  <div class="form-area">
-    <%= form_with(model: @message) do |f| %>
-      <!--<span class="textarea-up fas fa-chevron-up"></span>-->
-
-      <div class="message-input">
-        <div class="flex-textarea">
-            <div class="textarea-dummy"></div>
-            <%= f.text_area :content, class: 'auto-resize' %>
-        </div>
-        <div class="image-preview-area">
-          <div class="img-wrapper">
-              <i class="fas fa-times close"></i>
-              <img src="#" alt="プレビュー" id="image-preview">
-          </div>
-        </div>
-      </div>
-
-      <div class="image-input">
-        <%= f.label :image, '画像'%>
-        <%= f.file_field :image %>
-      </div>
-
-      <div class="submit-btn">
-        <%= f.submit '送信', class: 'submit' %>
-      </div>
-
-    <% end %>
-  </div>
+<div class="message-list" id="message-container">
+  <%= render @messages %>
 </div>
+
+<div class="form-area">
+  <%= form_with(model: @message) do |f| %>
+
+    <div class="message-input">
+      <div class="flex-textarea">
+        <div class="textarea-dummy"></div>
+        <%= f.text_area :content, class: 'auto-resize' %>
+      </div>
+      <div class="image-preview-area">
+        <div class="img-wrapper">
+          <i class="fas fa-times close"></i>
+          <img src="#" alt="プレビュー" id="image-preview">
+        </div>
+      </div>
+    </div>
+
+    <div class="image-input">
+      <%= f.label :image, '画像'%>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="submit-btn">
+      <%= f.submit '送信', class: 'submit' %>
+    </div>
+
+  <% end %>
+</div>
+
+<script type="text/javascript">
+　document.addEventListener('turbolinks:load', () => {
+　  const messageList = document.getElementById('message-container');
+    const main = document.querySelector('.main');
+    const scrollHeight = messageList.scrollHeight;
+    main.scrollTop = scrollHeight;
+  });
+</script>

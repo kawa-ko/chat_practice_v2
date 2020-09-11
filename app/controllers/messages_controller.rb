@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :require_user_logged_in?
+
   def create
     @message = current_user.messages.create!(message_params)
 

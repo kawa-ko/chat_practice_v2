@@ -1,5 +1,4 @@
-$(function(){
-   const messageList = $('.message-list');
+$(document).on('turbolinks:load',function(){
    const submitBtn = $('.submit');
    const textArea = $('.auto-resize');
    const textareaDummy = $('.textarea-dummy');
@@ -8,6 +7,7 @@ $(function(){
    const previewArea = $('#image-preview');
    const formArea = $('.form-area');
 
+   //フォームの高さが画面最上部に達したら高さを指定し、スクロールできるようにするためのファンクション
    const setFormAreaHeight = function(){
        if(formArea.innerHeight() >= $('body').height()){
            formArea.css({
@@ -17,9 +17,17 @@ $(function(){
        }
    }
 
-
-   //読み込み時に一番下のメッセージを表示
-   $('.main').scrollTop(messageList[0].scrollHeight);
+   //ハンバーガーメニューの処理
+   const hamburger = $('.sp-hamburger');
+   hamburger.click(function(){
+       if($(this).hasClass('open')){
+           $(this).removeClass('open');
+           $('.sp-menu').removeClass('show');
+       }else{
+           $(this).addClass('open');
+           $('.sp-menu').addClass('show');
+       }
+   });
 
    //送信ボタンがクリックされた時の処理
    submitBtn.click(function(){
@@ -45,8 +53,6 @@ $(function(){
         　　$('.image-preview-area').fadeOut();
        }
 
-       //一番下のメッセージへスクロール
-       $('.main').animate({scrollTop: messageList[0].scrollHeight},300);
    });
 
    //テクストエリアに入力した文字数が多くなったら自動で高さを変える。
@@ -77,13 +83,16 @@ $(function(){
        }
    });
 
-   $('.close').click(function(){
-       formArea.css({
-           'height':'auto',
-           'overflow':'hidden'
+   $('#image-preview').on('load',function(){
+      $('.close').click(function(){
+        console.log('close');
+        formArea.css({
+            'height':'auto',
+            'overflow':'hidden'
+        });
+ 
+        $('.image-preview-area').fadeOut();
+        imageInput.val("");
        });
-
-       $('.image-preview-area').fadeOut();
-       imageInput.val("");
    });
 });

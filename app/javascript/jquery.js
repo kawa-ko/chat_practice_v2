@@ -9,11 +9,13 @@ $(document).on('turbolinks:load',function(){
 
    //フォームの高さが画面最上部に達したら高さを指定し、スクロールできるようにするためのファンクション
    const setFormAreaHeight = function(){
-       if(formArea.innerHeight() >= $('body').height()){
+       const mainAreaHeight = $('body').height()-$('.room-header').innerHeight();
+       if(formArea.innerHeight() >= mainAreaHeight){
            formArea.css({
-            'height':'100vh',
+            'height':mainAreaHeight,
             'overflow':'auto' 
            });
+           console.log('maximum!');
        }
    }
 

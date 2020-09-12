@@ -3,13 +3,11 @@ Rails.application.routes.draw do
 
   root 'rooms#index'
 
-  resources :messages, only: :create
-
+  resources :messages, only: [:create, :edit, :update, :destroy]
   resources :users
 
   resources :rooms, except: [:index]
 
-  get 'roomdelete/:id', to: 'rooms#destroy'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'

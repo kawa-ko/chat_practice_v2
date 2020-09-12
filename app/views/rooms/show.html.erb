@@ -1,3 +1,23 @@
+<style>
+  .background{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+    background-image: url('<%= @room.image.url %>');
+    background-color: rgba(0,0,0,0.5);
+    background-blend-mode: multiply;      background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+</style>
+
+<% if @room.image? %>
+  <div class="background">
+  </div>
+<% end %>
+
 <div class="room-header">
   <h2 class="room-name">
     <%= @room.name %>
@@ -8,7 +28,7 @@
     </button>
     <nav class="room-nav">
       <ul>
-        <% if @room.host_id = current_user.id %>
+        <% if @room.host_id == current_user.id %>
           <li>
             <%= link_to 'ルームを編集', edit_room_path(@room) %>
           </li>
@@ -58,7 +78,7 @@
 </div>
 
 <script type="text/javascript">
-　document.addEventListener('turbolinks:load', () => {
+　document.addEventListener('DOMContentLoaded', () => {
 　  const messageList = document.getElementById('message-container');
     const main = document.querySelector('.main');
     const scrollHeight = messageList.scrollHeight;

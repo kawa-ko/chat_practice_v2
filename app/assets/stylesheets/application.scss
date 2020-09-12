@@ -51,6 +51,7 @@ a:link,a:visited,a:hover,a:active{
     float: left;
     height: 100vh;
     position: fixed;
+    z-index: 40;
     .header-top{
         padding: 20px;
         .header-logo-title{
@@ -129,7 +130,9 @@ a:link,a:visited,a:hover,a:active{
     .room-header{
         padding: 30px;
         color: #fff;
-        position: relative;
+        position: fixed;
+        width: 80%;
+        z-index: 20;
         background-color: #4b4c61;
         .room-name{
             font-size: 2rem;
@@ -144,7 +147,9 @@ a:link,a:visited,a:hover,a:active{
             padding-right: 30px;
             top: 50%;
             transform: translateY(-50%);
+            z-index: 30;
             .room-menu-btn{
+                outline: none;
                 font-size: 2rem;
                 transition: opacity .2s;
                 &:hover{
@@ -154,13 +159,14 @@ a:link,a:visited,a:hover,a:active{
             .room-nav{
                 opacity: 0;
                 position: absolute;
+                visibility: hidden;
                 background-color: #eee;
                 border-radius: 8px;
                 padding: 15px;
                 right: 10px;
                 top: 50px;
                 width: 150px;
-                transition: opacity .3s, transform .3s;
+                transition: opacity .3s, transform .3s, visibility .3s;
                 ul{
                     list-style: none;
                     li{
@@ -178,6 +184,7 @@ a:link,a:visited,a:hover,a:active{
                     }
                 }
                 &.show{
+                    visibility: visible;
                     transform: translateY(10px);
                     opacity: 1;
                 }
@@ -185,7 +192,7 @@ a:link,a:visited,a:hover,a:active{
         }
     }
     .message-list{
-        padding: 30px 50px 120px;
+        padding: 120px 50px;
         .message-container{
             .message-content{
                 background-color: #fff;
@@ -222,12 +229,60 @@ a:link,a:visited,a:hover,a:active{
                     max-width: 200px;
                     border-radius: 10px;
                 }
+                .message-menu{
+                    width: 100%;
+                    text-align: right;
+                    position: relative;
+                    outline: none;
+                    .menu-btn{
+                        outline: none;
+                        color: #888;
+                        font-size: 1.1rem;
+                        transition: opacity .2s;
+                        &:hover{
+                            opacity: 0.7;
+                        }
+                        &.show + .message-menu-nav{
+                            opacity: 1;
+                            visibility: visible;
+                            transform: translateY(5px);
+                        }
+                    }
+                    .message-menu-nav{
+                        position: absolute;
+                        text-align: center;
+                        opacity: 0;
+                        visibility: hidden;
+                        width: 100px;
+                        top: 15px;
+                        left: 70%;
+                        padding: 8px;
+                        background-color: #fff;
+                        border-radius: 5px;
+                        transition: opacity .3s, visibility .3s, transform .3s;
+                        ul{
+                            list-style: none;
+                            .message-nav-item{
+                                padding: 5px 0;
+                                .link-nav{
+                                    display: inline-block;
+                                    transition: .2s;
+                                    &:hover{
+                                        transform: scale(1.1);
+                                        opacity: 0.8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
     .form-area{
         width: 80%;
         position: fixed;
+        z-index: 20;
         bottom: 0;
         background-color: #444;
         padding: 30px 40px;

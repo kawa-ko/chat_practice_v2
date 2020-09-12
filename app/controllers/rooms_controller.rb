@@ -32,7 +32,6 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
-    room_host_check(@room)
     if current_user.id != @room.host_id
       redirect_to room_path(@room)
     else

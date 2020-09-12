@@ -1,0 +1,4 @@
+$(function(){
+    $('.message-list').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
+    $('.message-edit-form').fadeIn();
+});

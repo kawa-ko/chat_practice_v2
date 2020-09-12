@@ -16,5 +16,68 @@
 		<% if message.image? %>
 		    <%= image_tag message.image.url, class: 'message-image' %>
 		<% end %>
+		
+		<button class="message-menu">
+		  <i class="fas fa-ellipsis-h menu-btn" onclick="
+		  if($(this).hasClass('show')){
+			  $(this).removeClass('show');
+		  }else{
+			  $(this).addClass('show');
+		  }
+		  "></i>
+		  <nav class="message-menu-nav">
+		    <ul>
+			  <li class="message-nav-item">
+			    <%= link_to 'メッセージ編集', edit_message_path(message), remote: true, class: 'link-nav'%>
+			  </li>
+			  <li class="message-nav-item">
+			    <p 
+				onclick="
+				const destroyConfirm = $(this).parents('.message-container').next('.message-destroy-confirmation');
+				destroyConfirm.fadeIn();
+				"
+				class="link-nav delete-confirm-link">
+				メッセージ削除
+				</p>
+			  </li>
+			</ul>
+		  </nav>
+		</button>
 	</div>
+</div>
+<div class="message-destroy-confirmation">
+	<div class="overlay"></div>
+    <div class="confirm-modal">
+        <p class="confirmation">このメッセージを削除しますか</p>
+        <div class="deleted-message message-container">
+	        <div class="message-content">
+	            <div class="user-prof">
+		          <% if message.user.image? %>
+                    <%= image_tag message.user.image.url %>
+                  <% else %>
+                    <%= image_tag  '1907765.jpg' %>
+                  <% end %>
+		          <p class="message-user-name">
+		            <%= message.user.name %>
+		          </p>
+		        </div>
+		        <p class="content">
+		          <%= message.content %>
+		        </p>
+		        <% if message.image? %>
+		          <%= image_tag message.image.url, class: 'message-image' %>
+		        <% end %>
+	        </div>
+       </div>
+       <div class="button-group">
+         <button class="cancel btn"
+		 onclick="
+		 $(this).parents('.message-destroy-confirmation').fadeOut();
+		 "
+		 >
+		   キャンセル
+		 </button>
+         <%= link_to '削除', message_path(message), method: :delete, class: 'delete btn'%>
+       </div>
+    </div>
 </div>

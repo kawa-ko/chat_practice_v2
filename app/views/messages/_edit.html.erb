@@ -1,10 +1,12 @@
 <div class="message-edit-form">
-	<div class="form-modal clearfix">
+	<div class="form-modal modal-inner clearfix">
       <h2 class="message-edit-heading">
         メッセージ編集
       </h2>
       <button class="close-btn">
-        <i class="fas fa-times"></i>
+        <%= link_to room_path(message.room) do %>
+          <i class="fas fa-times"></i>
+        <% end %>
       </button>
       <div class="message-user-icon">
         <% if message.user.image? %>
@@ -25,7 +27,9 @@
             </div>
     		<%= f.file_field :image , class: 'imgarea'%> 
     		<% if message.image? %>
-    		  <%= image_tag message.image.url , class: 'img-preview-area' %>
+    		  <%= image_tag message.image.url , class: 'img-preview-area img-exist' %>
+        <% else %>
+          <img src="#" alt="プレビュー" class="img-preview-area no-img">
     		<% end %>
         </div>
         <div class="img-input-area">
@@ -75,17 +79,15 @@ $(function(){
     }
    };
 
+   $('.no-img').hide();
+
    //ユーザー作成、編集でプレビューされていたプロフィール画像を削除する処理
    editDeleteBtn.on('change',function(){
+       console.log('unko');
        if($(this).is(':checked')){
-           editedImg.fadeOut();
+           editedImg.fadeOut().addClass('no-img');
        }else{
-           const file = editedImgInput.prop('files')[0];
-           if(file !== undefined){
-             setSrc(file);
-           }else{
-               return;
-           }
+           editedImg.fadeIn().removeClass('no-img');
        }
    });
 
@@ -93,6 +95,9 @@ $(function(){
    editedImgInput.on('change',function(e){
      const file = e.target.files[0];
      setSrc(file);
+     if(editedImg.hasClass('no-img')){
+       editedImg.fadeIn().removeClass('no-img');
+     }
    });
 
    $('.close-btn').click(function(){

@@ -16,6 +16,26 @@
 
 @import 'reset';
 
+@mixin modal{
+    display: none;
+    position: absolute;
+    z-index: 60;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    .modal-inner{
+        position: absolute;
+        background-color: #fff;
+        border-radius: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;text-align: center;
+    }
+}
+
 //共通CSS
 *, *::after, *::before{
     box-sizing: border-box;
@@ -51,7 +71,7 @@ a:link,a:visited,a:hover,a:active{
     float: left;
     height: 100vh;
     position: fixed;
-    z-index: 40;
+    z-index: 90;
     .header-top{
         padding: 20px;
         .header-logo-title{
@@ -132,7 +152,7 @@ a:link,a:visited,a:hover,a:active{
         color: #fff;
         position: fixed;
         width: 80%;
-        z-index: 20;
+        z-index: 70;
         background-color: #4b4c61;
         .room-name{
             font-size: 2rem;
@@ -191,6 +211,7 @@ a:link,a:visited,a:hover,a:active{
             }
         }
     }
+    
     .message-list{
         padding: 120px 50px;
         .message-container{
@@ -231,6 +252,7 @@ a:link,a:visited,a:hover,a:active{
                 }
                 .message-menu{
                     width: 100%;
+                    z-index: 40;
                     text-align: right;
                     position: relative;
                     outline: none;
@@ -255,9 +277,10 @@ a:link,a:visited,a:hover,a:active{
                         visibility: hidden;
                         width: 100px;
                         top: 15px;
-                        left: 70%;
+                        right: 0;
+                        z-index: 25;
                         padding: 8px;
-                        background-color: #fff;
+                        background-color: #eee;
                         border-radius: 5px;
                         transition: opacity .3s, visibility .3s, transform .3s;
                         ul{
@@ -279,10 +302,11 @@ a:link,a:visited,a:hover,a:active{
             }
         }
     }
+
     .form-area{
         width: 80%;
         position: fixed;
-        z-index: 20;
+        z-index: 50;
         bottom: 0;
         background-color: #444;
         padding: 30px 40px;
@@ -416,6 +440,9 @@ a:link,a:visited,a:hover,a:active{
         align-items: center;
         .header-top{
             display: inline-block;
+            .user-icon{
+                display: none;
+            }
         }
         .header-bottom{
             display: none;
@@ -430,7 +457,7 @@ a:link,a:visited,a:hover,a:active{
         position: absolute;
         right: 5px;
         top: 5px;
-        z-index: 20;
+        z-index: 100;
         .hamburger-bar{
             width: 100%;
             height: 4px;
@@ -472,7 +499,7 @@ a:link,a:visited,a:hover,a:active{
         top: 0;
         left: 0;
         padding: 50px;
-        z-index: 10;
+        z-index: 80;
         width: 100%;
         height: 100%;
         transform: translateX(100%);
@@ -496,6 +523,7 @@ a:link,a:visited,a:hover,a:active{
                     box-shadow: 2px 2px 3px 1px #aaa;
                     overflow: hidden;
                     img{
+                        height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
@@ -517,6 +545,12 @@ a:link,a:visited,a:hover,a:active{
                     transition-delay: .5s;
                     &:nth-of-type(2){
                         transition-delay: .6s;
+                    }
+                    &:nth-of-type(3){
+                        transition-delay: .7s;
+                    }
+                    &:nth-of-type(4){
+                        transition-delay: .8s;
                     }
                     a{
                         padding-left: 10px;
@@ -542,8 +576,18 @@ a:link,a:visited,a:hover,a:active{
 
     .main{
         width: 100%;
+        .room-header{
+            width: 100%;
+            padding: 15px;
+            .room-name{
+                font-size: 1.5rem;
+            }
+        }
         .message-list{
-            padding: 0 50px 80px;
+            padding: 100px 50px 100px;
+            .message-content{
+                max-width: 100%;
+            }
         }
         .form-area{
             width: 100%;
@@ -600,8 +644,20 @@ a:link,a:visited,a:hover,a:active{
         }
     }
     .main{
+        .room-header{
+            .room-name{
+                font-size: 1.2rem;
+            }
+        }
         .message-list{
             padding: 100px 20px 120px;
+            .message-container{
+                .message-content{
+                    .content{
+                        font-size: 1rem;
+                    }
+                }
+            }
         }
         .form-area{
             padding: 20px 10px;

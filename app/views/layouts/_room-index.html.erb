@@ -11,7 +11,7 @@
           <h3 class="room-name">
             <%= room.name %>
           </h3>
-          <%= link_to '参加', room_path(room), class: 'enter-btn' %>
+          <%= link_to '参加', room_path(room), data: { "turbolinks" => false}, class: 'enter-btn' %>
         </div>
       </li>
     <% end %>

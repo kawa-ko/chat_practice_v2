@@ -6,6 +6,10 @@ class Message < ApplicationRecord
     belongs_to :user
     belongs_to :room
     
+    def user
+        @user = User.find(self.user_id) 
+    end
+
     def template
         ApplicationController.renderer.render partial: 'messages/message', locals: { message: self }
     end

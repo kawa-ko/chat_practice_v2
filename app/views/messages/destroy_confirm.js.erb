@@ -1,0 +1,11 @@
+$(function(){
+    const currentUserId = <%= current_user.id%>;
+    const userId = <%= @message.user.id %>;
+    if(currentUserId !== userId){
+        alert('この操作は禁じられています');  
+        return;  
+    }else{
+      $('.message-list').append("<%= escape_javascript(render 'messages/destroy_confirm', message: @message) %>");
+      $('.message-destroy-confirmation').fadeIn();
+    }
+});

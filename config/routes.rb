@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :rooms, except: [:index]
 
+  get 'msg_destroy_confirm', to: 'messages#destroy_confirm'
+  get 'deletemessage/:id', to: 'messages#destroy'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'

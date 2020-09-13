@@ -1,4 +1,11 @@
 $(function(){
-    $('.message-list').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
-    $('.message-edit-form').fadeIn();
+    const currentUserId = <%= current_user.id%>;
+    const userId = <%= @user.id %>;
+    if(currentUserId !== userId){
+        alert('この操作は禁じられています');  
+        return;  
+    }else{
+      $('.message-list').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
+      $('.message-edit-form').fadeIn();
+    }
 });

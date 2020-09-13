@@ -9,9 +9,7 @@ class MessagesController < ApplicationController
 
   def edit
     @message = Message.find(params[:id])
-    if @message.user_id != current_user.id
-      redirect_to room_path(@message.room_id)
-    end
+    @user = @message.user
   end
 
   def update
@@ -21,9 +19,20 @@ class MessagesController < ApplicationController
     end
   end
 
+  def destroy_confirm
+    @message = Message.find(params[:format])
+  end
+
+  def destroy_confirm
+    @message = Message.find(params[:format])
+  end
+
   def destroy
     @message = Message.find(params[:id])
-    if @message.destroy
+    if @message.user == current_user
+      @message.destroy
+      redirect_to room_path(@message.room_id)
+    else
       redirect_to room_path(@message.room_id)
     end
   end

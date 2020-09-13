@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-document.addEventListener('turbolinks:load',function(){
+document.addEventListener('DOMContentLoaded',function(){
 consumer.subscriptions.create({ channel: "RoomChannel", room: document.getElementById('message-container').dataset.room}, {
   connected() {
     console.log('connected')

@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'rooms/show' %>
+
 <style>
   .background{
     width: 100vw;
@@ -45,7 +47,9 @@
 </div>
 
 <div class="message-list" id="message-container" data-room=<%= @room.id %>>
-  <%= render @messages %>
+  <% @messages.each do |message| %>
+    <%= render 'messages/message', message: message, user: message.user %>
+  <% end %>
 </div>
 
 <div class="form-area">
@@ -79,11 +83,6 @@
 
 <script type="text/javascript">
 　document.addEventListener('DOMContentLoaded', () => {
-　  const messageList = document.getElementById('message-container');
-    const main = document.querySelector('.main');
-    const scrollHeight = messageList.scrollHeight;
-    main.scrollTop = scrollHeight;
-
     const roomNav = $('.room-nav');
     $('.room-menu-btn').click(function(){
       if(roomNav.hasClass('show')){

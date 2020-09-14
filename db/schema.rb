@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_105755) do
+ActiveRecord::Schema.define(version: 2020_09_14_020214) do
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 2020_09_13_105755) do
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
     t.string "image"
     t.bigint "host_id", null: false
+    t.string "name"
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 

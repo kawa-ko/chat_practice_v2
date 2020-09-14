@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: chat_practice_v2_production
   username: chat_practice_v2
   password: <%= ENV['CHAT_PRACTICE_V2_DATABASE_PASSWORD'] %>

@@ -47,17 +47,15 @@
     </nav>
   </div>
 
-</header>
+  <% if logged_in? %>
+  <div class="sp-hamburger">
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+    <span class="hamburger-bar"></span>
+  </div>
 
-<div class="sp-hamburger">
-    <span class="hamburger-bar"></span>
-    <span class="hamburger-bar"></span>
-    <span class="hamburger-bar"></span>
-</div>
-
-<div class="sp-menu">
-  <nav class="sp-nav">
-    <% if logged_in? %>
+  <div class="sp-menu">
+    <nav class="sp-nav">
       <div class="user-icon">
         <div class="user-img-area">
           <% if current_user.image? %>
@@ -86,17 +84,20 @@
           <%= link_to '退会', user_path(current_user), method: :delete, class: 'withdrawl-link' %>
         </li>
       </ul>
-    <% else %>
-      <ul>
-        <li class="sp-nav-item">
-          <i class="fas fa-sign-in-alt icon"></i>
+    </nav>
+  </div>
+ <% else %>
+ <div class="sp-header-right">
+    <nav class="header-nav">
+      <ul class="header-nav-list">
+        <li class="header-nav-item">
           <%= link_to 'ログイン', login_path, remote: true %>
         </li>
-        <li class="sp-nav-item">
-          <i class="fas fa-user-plus icon"></i>
-          <a href="/users/new">ユーザー登録</a>
+        <li class="header-nav-item">
+          <%= link_to 'ユーザー登録', new_user_path %>
         </li>
       </ul>
-    <% end %>
-  </nav>
-</div>
+    </nav>
+  </div>
+  <% end %>
+</header>

@@ -1,0 +1,20 @@
+$(function(){
+   $('.main').append('<%= escape_javascript(render 'sessions/new' )%>');
+   if($('.sp-hamburger').hasClass('open')){
+       $('.sp-hamburger').removeClass('open');
+   }
+   if($('.sp-menu').hasClass('show')){
+       $('.sp-menu').removeClass('show');
+   }
+
+   $('.login-form').fadeIn();
+
+   $(document).on('click',function(){
+       $('.close').click(function(){
+           $('.login-form').fadeOut();
+           setTimeout(function(){
+               $('.login-form').remove();
+           },400)
+       });
+   })
+});

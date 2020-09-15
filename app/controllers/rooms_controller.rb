@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :require_user_logged_in?, only: [:show]
+  before_action :require_user_logged_in?, except: [:index]
   def index
     @rooms = Room.all.page(params[:page]).per(20)
   end

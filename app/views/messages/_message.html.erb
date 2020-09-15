@@ -11,7 +11,7 @@
 		  </p>
 		</div>
 		<p class="content">
-		    <%= message.content %>
+		    <%= safe_join(message.content.split("\n"), tag(:br)) %>
 		</p>
 		<% if message.image? %>
 		    <%= image_tag message.image.url, class: 'message-image' %>

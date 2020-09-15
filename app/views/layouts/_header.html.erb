@@ -37,7 +37,7 @@
           </li>
         <% else %>
           <li class="header-nav-item">
-            <a href="/login">ログイン</a>
+            <%= link_to 'ログイン', login_path, remote: true %> 
           </li>
           <li class="header-nav-item">
             <a href="/users/new">ユーザー登録</a>
@@ -90,7 +90,7 @@
       <ul>
         <li class="sp-nav-item">
           <i class="fas fa-sign-in-alt icon"></i>
-          <a href="/login">ログイン</a>
+          <%= link_to 'ログイン', login_path, remote: true %>
         </li>
         <li class="sp-nav-item">
           <i class="fas fa-user-plus icon"></i>

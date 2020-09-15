@@ -16,6 +16,9 @@
 		<% if message.image? %>
 		    <%= image_tag message.image.url, class: 'message-image' %>
 		<% end %>
+		<time class="date">
+		  <%= message.created_at %>
+		</time>
 
 		<button class="message-menu">
 		  <i class="fas fa-ellipsis-h menu-btn" onclick="

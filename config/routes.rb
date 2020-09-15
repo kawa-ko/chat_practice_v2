@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'participations/index'
+  get 'participations/new'
+  get 'participations/create'
+  get 'participations/destroy'
   mount ActionCable.server => '/cable'
 
   root 'rooms#index'
@@ -6,8 +10,9 @@ Rails.application.routes.draw do
   resources :messages, only: [:create, :edit, :update, :destroy]
   resources :users
 
-  resources :rooms, except: [:index]
-
+  resources :rooms, except: [:index], shallow: true do
+    resources :participations, only: [:index, :create, :destroy]
+  end
   get 'msg_destroy_confirm', to: 'messages#destroy_confirm'
   get 'deletemessage/:id', to: 'messages#destroy'
   get 'login', to: 'sessions#new'

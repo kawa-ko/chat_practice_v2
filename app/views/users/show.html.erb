@@ -1,16 +1,19 @@
 <div class="user-desc-wrapper">
   <div class="user-thumb">
-    <% if current_user.image? %>
-      <%= image_tag current_user.image.url %>
+    <% if @user.image? %>
+      <%= image_tag @user.image.url %>
     <% else %>
       <%= image_tag '1907765.jpg' %>
     <% end %>
   </div>
   <p class="user-name">
-    <%= current_user.name %>
+    <%= @user.name %>
   </p>
   <h2 class="host-rooms">
     作ったルーム
   </h2>
   <%= render 'layouts/room-index', rooms: @rooms %>
+  
+  <h2>参加中のルーム</h2>
+  <%= render 'layouts/room-index', rooms: @participating_rooms %>
 </div>

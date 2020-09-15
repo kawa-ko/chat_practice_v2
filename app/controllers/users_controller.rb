@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @rooms = Room.where(host_id: @user.id)
+    @participating_rooms = @user.participating_rooms.all
   end
 
   def new

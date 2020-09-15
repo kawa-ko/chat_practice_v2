@@ -1,0 +1,22 @@
+<div class="members-wrapper">
+  <div class="members-modal modal-inner">
+    <h2 class="title">メンバー一覧</h2>
+    <span class="close fas fa-times"></span>
+    <ul class="members-list">
+      <% members.each do |member| %>
+        <%= link_to (user_path(member)) do %>
+          <li class="member">
+            <div class="img-area">
+              <% if member.image? %>
+                <%= image_tag member.image.url %>
+              <% else %>
+                <%= image_tag '1907765.jpg'%>
+              <% end %>
+            </div>
+            <p class="member-name"><%= member.name %></p>
+          </li>
+        <% end %>
+     <% end %>
+    </ul>
+  </div>
+</div>

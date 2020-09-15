@@ -13,6 +13,14 @@ consumer.subscriptions.create({ channel: "RoomChannel", room: document.getElemen
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
+    if(data['join_notice']){
+      console.log('unko');
+      $('.message-list').append(data['join_notice']);
+      setTimeout(function(){
+        $('.join-notice').remove();
+      },3000);
+      return;
+    }
     console.log('received');
     const template = data['message'];
     const imageInput = document.getElementById('message_image');

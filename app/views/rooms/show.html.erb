@@ -15,6 +15,16 @@
   }
 </style>
 
+<div class="exit-confirm">
+  <div class="modal-inner exit-confirm-modal">
+    <h2 class="title">このルームから抜けますか？</h2>
+    <div class="button-group">
+      <button class="cancel-btn btn">キャンセル</button>
+      <%= link_to '抜ける', participation_path(@participation), method: :delete, class: 'exit-btn btn' %>
+    </div>
+  </div>
+</div>
+
 <% if @room.image? %>
   <div class="background">
   </div>
@@ -32,14 +42,17 @@
       <ul>
         <% if @room.host_id == current_user.id %>
           <li>
-            <%= link_to 'ルームを編集', edit_room_path(@room) %>
+            <%= link_to 'ルームを編集', edit_room_path(@room), class: 'nav-link' %>
           </li>
           <li>
-            <%= link_to 'ルームを削除', room_path(@room), method: :delete %>
+            <%= link_to 'ルームを削除', room_path(@room), method: :delete, class: 'nav-link' %>
           </li>
         <% end %>
         <li>
-          <a href="#">メンバー一覧</a>
+          <%= link_to 'メンバー一覧', room_participations_path(@room), remote: true , class: 'nav-link'%>
+        </li>
+        <li>
+          <button class='nav-link exit-link'>ルームから抜ける</button>
         </li>
       </ul>
     </nav>
@@ -90,6 +103,14 @@
       }else{
         roomNav.addClass('show');
       }
+    });
+
+    $('.exit-link').click(function(){
+      $('.exit-confirm').fadeIn();
+    });
+
+    $('.exit-confirm').find('.cancel-btn').click(function(){
+      $('.exit-confirm').fadeOut();
     });
   });
 </script>

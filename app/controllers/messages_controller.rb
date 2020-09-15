@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   def update
     @message = Message.find(params[:id])
     if @message.update(message_params)
-      redirect_to room_path(@message.room_id)
+      @message
     end
   end
 

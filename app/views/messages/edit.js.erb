@@ -5,7 +5,11 @@ $(function(){
         alert('この操作は禁じられています');  
         return;  
     }else{
-      $('.message-list').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
+      $('.main').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
       $('.message-edit-form').fadeIn();
     }
+
+    $('.submit-btn').click(function(){
+      $('.message-edit-form').fadeOut();
+    });
 });

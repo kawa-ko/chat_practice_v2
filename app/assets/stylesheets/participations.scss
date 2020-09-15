@@ -1,0 +1,88 @@
+// Place all the styles related to the participations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'application';
+
+.members-wrapper{
+    @include modal();
+    height: 100%;
+    .members-modal{
+        padding: 0;
+        width: 400px;
+        .title{
+            background-color: #3a3a42;
+            font-size: 1.2rem;
+            color: #fff;
+            padding: 10px;
+            border-radius: 20px 20px 0 0;
+        }
+        .close{
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #fff;
+            font-size: 1.5rem;
+            display: inline-block;
+            margin: 10px 15px;
+        }
+        .members-list{
+            width: 100%;
+            list-style: none;
+            padding: 0 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            a{
+                diaplay: block;
+            }
+            a:nth-of-type(1) ~ a{
+                display: block;
+                border-top: 1px solid #ccc;
+            } 
+            .member{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                text-align: left;
+                padding: 10px 0;
+                .img-area{
+                    overflow: hidden;
+                    padding: 10px;
+                    width: 60px;
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        box-shadow: 2px 2px 3px 2px #ccc;
+                        object-fit: cover;
+                    }
+                }
+                .member-name{
+                    width: 340px;
+                    font-size: 1.1rem;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 760px){
+    .members-wrapper{
+        .members-modal{
+            width: 80%;
+            .members-list{
+                max-height: 600px;
+                .member{
+                   .img-area{
+                       width: 25%;
+                   } 
+                   .member-name{
+                       width: 75%;
+                       font-size: 1rem;
+                   }
+                }
+            }
+        }
+    }
+}

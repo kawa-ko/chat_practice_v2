@@ -10,6 +10,9 @@ class User < ApplicationRecord
     has_many :messages, dependent: :destroy
 
     has_many :created_rooms, class_name: 'Room', foreign_key: 'host_id', dependent: :destroy
+
+    has_many :participations, dependent: :destroy
+    has_many :participating_rooms, through: :participations, source: :room
     
     mount_uploader :image, ImageUploader
 

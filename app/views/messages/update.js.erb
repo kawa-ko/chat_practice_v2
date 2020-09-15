@@ -1,0 +1,4 @@
+$(function(){
+    $('.content').text('<%= escape_javascript(@message.content) %>');
+    $('.date').text('<%= @message.updated_at %>')
+});

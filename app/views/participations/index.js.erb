@@ -1,0 +1,12 @@
+$(function(){
+    $('.main').append("<%= escape_javascript(render 'participations/participating_users', members: @participations ) %>");
+    $('.members-wrapper').fadeIn();
+
+    $(document).on('click','.close',function(){
+        $('.members-wrapper').fadeOut();
+        setTimeout(function(){
+            $('.members-wrapper').remove();
+        },400);
+        return;
+    });
+});

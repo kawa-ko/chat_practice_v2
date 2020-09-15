@@ -1,11 +1,13 @@
 class RoomsController < ApplicationController
   before_action :require_user_logged_in?, only: [:show]
   def index
-    @rooms = Room.all
+    @rooms = Room.all.page(params[:page]).per(20)
   end
 
   def show
     @room  = Room.find(params[:id])
+    @participation = Participation.find_by(room_id: @room.id, user_id: current_user.id)
+    @participating_users = @room.participating_users.all
     @messages = @room.messages.all
     @message = current_user.messages.new(room_id: @room.id)
   end

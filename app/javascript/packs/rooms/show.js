@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded',function(){
         const previewImage = reader.result;
         previewArea.attr('src',previewImage);
         messageInput.css({'height':'auto'});
-        $('.image-preview-area').fadeIn();
+        $('.image-preview-area').fadeIn().addClass('show');
         previewArea.on('load',function(){
             setFormAreaHeight();
             formArea.animate({scrollTop: formArea[0].scrollHeight},300);
@@ -56,13 +56,18 @@ document.addEventListener('DOMContentLoaded',function(){
        'overflow':'hidden'
       });
 
-      //40px以上の場合（改行したとき、字数が多い時、画像がある時など）は
+      //40px以上の場合（改行したとき、字数が多い時など）は
       //テクストエリアの高さを40pxに戻す。
       //(画像があった場合、room_cahnnel.jsの方で削除する。
       //ここで削除すると、パラメーターに画像が入らない
       if(textareaDummy.height() > 40){
      　　textareaDummy.animate({'height':40},300);
-     　　$('.image-preview-area').fadeOut();
+     　　$('.image-preview-area').fadeOut().addClass('show');
+      }
+
+      //画像のプレビューが表示してあった場合それを消す。
+      if($('.image-preview-area').hasClass('show')){
+        $('.image-preview-area').fadeOut().removeClass('show');
       }
 
     });
@@ -76,6 +81,7 @@ document.addEventListener('DOMContentLoaded',function(){
        setFormAreaHeight();
     });
 
+    //画像のプレビューを消した時の処理
     $('#image-preview').on('load',function(){
       $('.close').click(function(){
         console.log('close');
@@ -84,9 +90,9 @@ document.addEventListener('DOMContentLoaded',function(){
           'overflow':'hidden'
         });
    
-        $('.image-preview-area').fadeOut();
-          imageInput.val("");
-        });
+        $('.image-preview-area').fadeOut().removeClass('show');
+        imageInput.val("");
+      });
     });
 
 });

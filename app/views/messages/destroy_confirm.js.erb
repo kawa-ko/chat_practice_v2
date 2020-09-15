@@ -5,7 +5,7 @@ $(function(){
         alert('この操作は禁じられています');  
         return;  
     }else{
-      $('.message-list').append("<%= escape_javascript(render 'messages/destroy_confirm', message: @message) %>");
+      $('.main').append("<%= escape_javascript(render 'messages/destroy_confirm', message: @message) %>");
       $('.message-destroy-confirmation').fadeIn();
     }
 });

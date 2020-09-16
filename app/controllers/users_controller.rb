@@ -5,8 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @rooms = Room.where(host_id: @user.id)
-    @participating_rooms = @user.participating_rooms.all
+    @rooms = @user.created_rooms.all.page(params[:page])
   end
 
   def new
@@ -39,7 +38,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :remove_image)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :remove_image, :prof)
   end
 
 end

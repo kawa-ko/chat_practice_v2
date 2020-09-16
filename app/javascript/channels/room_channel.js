@@ -14,10 +14,15 @@ consumer.subscriptions.create({ channel: "RoomChannel", room: document.getElemen
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     if(data['join_notice']){
-      console.log('unko');
       $('.message-list').append(data['join_notice']);
       setTimeout(function(){
         $('.join-notice').remove();
+      },3000);
+      return;
+    }else if(data['exit_notice']){
+      $('.message-list').append(data['exit_notice']);
+      setTimeout(function(){
+        $('.exit-notice').remove();
       },3000);
       return;
     }

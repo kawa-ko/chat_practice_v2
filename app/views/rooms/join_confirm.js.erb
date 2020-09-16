@@ -1,0 +1,12 @@
+$(function(){
+    console.log('unko');
+    $('.main').append('<%= escape_javascript(render 'layouts/join_confirmation', room: @room) %>');
+    $('.join-confirm').fadeIn();
+
+    $('.join-cancel-btn').click(function(){
+        $('.join-confirm').fadeOut(300);
+        setTimeout(function(){
+            $('.join-confirm').remove();
+        },310);
+    });
+});

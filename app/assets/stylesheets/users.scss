@@ -1,6 +1,8 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'application';
+
 .form-wrapper{
     width: 80%;
     margin: 0 auto;
@@ -22,7 +24,7 @@
             padding-left: 20px;
             font-size: 1.3rem;
         }
-        input{
+        textarea,input{
             display: block;
             border: 1px solid #ccc;
             width: 100%;
@@ -31,6 +33,10 @@
             padding: 5px 10px;
             margin: 30px auto;
             border-radius: 10px;
+        }
+        textarea{
+            height: 150px;
+            resize: none;
         }
         .submit-btn{
             margin-bottom: 20px;
@@ -128,14 +134,41 @@
     }
     .user-name{
         font-size: 2rem;
-        padding-bottom: 30px;
-        margin-bottom: 40px;
-        border-bottom: 2px dashed #90ddcb;
     }
-    .host-rooms{
-        display: inline-block;
-        padding-left: 15px;
-        border-left: 10px solid navy;
-        font-size: 1.7rem;
+    .user-prof{
+        color: #777;
+        width: auto;
+        max-width: 80%;
+        line-height: 1.9rem;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        padding: 20px 0 30px;
+        margin: 0 auto 40px;
+        border-bottom: 1px solid #90ddcb;
+    }
+    .user-rooms{
+        @include room-tab();
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .user-desc-wrapper{
+        .user-thumb{
+            width: 15vh;
+            height: 15vh;
+        }
+    }
+}
+
+@media screen and (max-width: 760px){
+    .user-desc-wrapper{
+        .user-thumb{
+            width: 30vh;
+            height: 30vh;
+        }
+        .user-prof{
+            font-size: 1rem;
+            text-align: left;
+        }
     }
 }

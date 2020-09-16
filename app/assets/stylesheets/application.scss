@@ -50,6 +50,55 @@
     }
 }
 
+@mixin room_tab{
+    .room-tabs{
+        position: relative;
+        margin-top: 20px;
+        .tab{
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            text-align: left;
+            border: none;
+            width: 50%;
+            float: left;
+            color: #fff;
+            display: inline-block;
+            padding: 10px;
+            font-size: 1.5rem;
+            background-color: #90ddcb;
+            transition: .3s;
+            &.show{
+                background-color: #fff;
+                border-left: 1px solid #ccc;
+                border-top: 2px solid #90ddcb;
+                border-right: 1px solid #ccc;
+                border-bottom: none;
+                color: #333;
+            }
+        }
+        .tab-content{
+            top: 0;
+            left: 0;
+            clear: both;
+            margin-top: 50px;
+            width: 100%;
+            position: absolute;
+            transition: .3;
+            .rooms{
+                display: 100%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1024px){
+        .room-tabs{
+            .tab{
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
 @keyframes show{
     0%{
         opacity: 0;
@@ -75,6 +124,10 @@
 //共通CSS
 *, *::after, *::before{
     box-sizing: border-box;
+}
+
+button{
+    outline: none;
 }
 
 body{
@@ -255,7 +308,7 @@ a:link,a:visited,a:hover,a:active{
     
     .message-list{
         position: relative;
-        .join-notice{
+        .notice{
             animation: show 2s ease;
             animation-fill-mode: forwards;
             position: fixed;
@@ -270,6 +323,9 @@ a:link,a:visited,a:hover,a:active{
             .user-name{
                 font-weight: bold;
             }
+        }
+        .exit-notice{
+            background-color: #b45858;
         }
         padding: 120px 50px;
         .message-container{
@@ -592,7 +648,6 @@ a:link,a:visited,a:hover,a:active{
             background-color: #fff;
             transition: opacity .3s, transform .3s;
             .sp-nav{
-                width: 50%;
                 margin: 0 auto;
                 text-align: center;
                 transition: transform .3s, opacity .3s;
@@ -601,6 +656,11 @@ a:link,a:visited,a:hover,a:active{
                 .user-icon{
                     border-bottom: 1px skyblue dashed;
                     padding-bottom: 50px;
+                    transition: opacity .2s, transform .2s;
+                    &:hover{
+                        opacity: 0.7;
+                        transform: scale(1.05);
+                    }
                     .user-img-area{
                         margin: 0 auto;
                         width: 30vw;
@@ -624,9 +684,10 @@ a:link,a:visited,a:hover,a:active{
                     margin-top: 80px;
                     .sp-nav-item{
                         opacity: 0;
-                        margin-top: 30px;
+                        margin: 30px 0;
+                        width: auto;
                         font-size: 2rem;
-                        transform: translateX(40px);
+                        transform: translateX(-40px);
                         transition: opacity .3s,transform .3s;
                         transition-delay: .5s;
                         &:nth-of-type(2){
@@ -639,6 +700,7 @@ a:link,a:visited,a:hover,a:active{
                             transition-delay: .8s;
                         }
                         a{
+                            display: inline-block;
                             padding-left: 10px;
                         }
                     }
@@ -654,6 +716,31 @@ a:link,a:visited,a:hover,a:active{
                         .sp-nav-item{
                             opacity: 1;
                             transform: translateX(0);
+                            a{
+                                position: relative;
+                                width: auto;
+                                display: inline-block;
+                                &::after{
+                                    transition: transform .3s;
+                                    content: "";
+                                    position: absolute;
+                                    display: block;
+                                    bottom: -10px;
+                                    left: 0;
+                                    height: 3px;
+                                    width: 100%;
+                                    opacity: 0;
+                                    transition: transform .3s, opacity .3s;
+                                    transform: translateX(-20px);
+                                    background-color: #91e1ec;
+                                }
+                                &:hover{
+                                    &::after{
+                                        transform: translateX(0);
+                                        opacity: 1;
+                                    }
+                                }
+                            }
                         }
                     }
                 }

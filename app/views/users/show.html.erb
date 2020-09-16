@@ -9,11 +9,40 @@
   <p class="user-name">
     <%= @user.name %>
   </p>
-  <h2 class="host-rooms">
-    作ったルーム
-  </h2>
-  <%= render 'layouts/room-index', rooms: @rooms %>
-  
-  <h2>参加中のルーム</h2>
-  <%= render 'layouts/room-index', rooms: @participating_rooms %>
+
+  <div class="user-prof">
+    <% if @user.prof %>
+      <%= safe_join(@user.prof.split("\n"), tag(:br)) %>
+    <% end %>
+  </div>
+
+  <div class="user-rooms">
+    <div class="room-tabs">
+      <%= link_to(create_index_path, remote: true) do %>
+        <button class="tab show create_room">
+          作成したルーム
+        </button>
+      <% end %>
+
+      <%= link_to(participating_index_path, remote: true) do %>
+    	  <button class="tab participating_room"> 
+          参加中のルーム
+        </button>
+      <% end %>
+      
+      <div class="tab-content create_room_content">
+        <%= render 'layouts/room-index', rooms: @rooms %>
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<script>
+  $(function(){
+      $('.tab').click(function(){
+          $('.tab').removeClass('show');
+          $(this).addClass('show');
+      });
+  });
+</script>

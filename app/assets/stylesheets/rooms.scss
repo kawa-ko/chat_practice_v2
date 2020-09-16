@@ -57,15 +57,84 @@
 }
 
 //ルーム一覧画面のルームを表示するためのカード用のcss
+.index-heading{
+    font-size: 2.3rem;
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 10px 0 10px 0 #bbb;
+}
+
+.room-index{
+    @include room-tab();
+    .room-tabs{
+        padding: 30px;
+        .tab{
+            width: 33.333%;
+        }
+        .tab-content{
+            top: 50px;
+            .pagination{
+                margin: 40px 0 20px;
+                display: block;
+                text-align: center;
+                span{
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 1.5rem;
+                    line-height: 40px;
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 5px;
+                    border-radius: 50%;
+                    transition: color .2s, background-color .2s, transform .2s;
+                    a{
+                        display: inline-block;
+                        color: #666;
+                    }
+                    .arrow{
+                        color: #666;
+                    }
+                    &:hover{
+                        transform: scale(1.1);
+                        background-color: #7abadd;
+                        a{
+                            color: #fff;
+                        }
+                        .arrow{
+                            color: #fff;
+                        }
+                        &.current{
+                            transform: scale(1);
+                        }
+                    }
+                }
+                .current{
+                    background-color: #7abadd;
+                    color: #fff;
+                    border-radius: 50%;
+                }
+                .last,.first{
+                    width: auto;
+                    border-radius: 0;
+                    padding: 0 10px;
+                    display: inline-block;
+                    transition: color .2s, transform .2s;
+                }
+            }
+        }
+    }
+}
+
 .rooms{
-    padding: 30px;
+    padding: 15px 30px;
     .room-list{
         list-style: none;
         display: flex;
         flex-wrap: wrap;
         .room{
-            width: 20%;
-            padding: 15px;
+            width: 25%;
+            padding: 30px;
             .room-card{
                 @include room-card();
                 .enter-btn{
@@ -92,6 +161,7 @@
     @include modal();
     .join-confirm-modal{
         .room-card{
+            @include room-card();
             width: 175px;
             height: 214px;
             margin: 0 auto;
@@ -141,7 +211,39 @@
         padding: 10px 0;
         .room-list{
             .room{
-                width: 50%;
+                width: 100%;
+                .room-card{
+                    position: relative;
+                    .image-area{
+                        position: relative;
+                        &::after{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            content: "";
+                            background-color: rgba(0,0,0,0.4);
+                        }
+                    }
+                    .room-name{
+                        position: absolute;
+                        top: 40%;
+                        left: 50%;
+                        color: #fff;
+                        transform: translate(-50%,-50%);
+                    }
+                    .enter-btn{
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        margin: 0 0 10px;
+                        transform: translateX(-50%);
+                        &:hover{
+                            transform: translate(-50%, 2px);
+                        }
+                    }
+                }
             }
         }
     }

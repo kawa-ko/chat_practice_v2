@@ -1,0 +1,3 @@
+$(function(){
+   $('.tab-content').html('<%= escape_javascript(render 'layouts/room-index', rooms: @rooms) %>');
+});

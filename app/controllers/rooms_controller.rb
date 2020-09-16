@@ -1,7 +1,15 @@
 class RoomsController < ApplicationController
   before_action :require_user_logged_in?, except: [:index]
   def index
-    @rooms = Room.all.page(params[:page]).per(20)
+    @rooms = Room.all.page(params[:page]).per(16)
+  end
+
+  def create_index
+    @created_rooms = current_user.created_rooms.all.page(params[:page]).per(16)
+  end
+
+  def participating_index
+    @participating_rooms = current_user.participating_rooms.all.page(params[:page]).per(16)
   end
 
   def show
@@ -19,6 +27,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
+      @participation = current_user.participations.create(room_id: @room.id)
       redirect_to root_path
     else
       render :new
@@ -53,6 +62,10 @@ class RoomsController < ApplicationController
       @room.destroy
       redirect_to root_path
     end
+  end
+
+  def join_confirm
+    @room = Room.find(params[:id])
   end
 
   private

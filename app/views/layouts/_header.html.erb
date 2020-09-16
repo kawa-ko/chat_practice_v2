@@ -56,29 +56,38 @@
 
   <div class="sp-menu">
     <nav class="sp-nav">
-      <div class="user-icon">
-        <div class="user-img-area">
-          <% if current_user.image? %>
-            <%= image_tag current_user.image.url %>
-          <% else %>
-            <%= image_tag  '1907765.jpg' %>
-          <% end %>
+      <%= link_to user_path(current_user) do %>
+        <div class="user-icon">
+          <div class="user-img-area">
+            <% if current_user.image? %>
+              <%= image_tag current_user.image.url %>
+            <% else %>
+              <%= image_tag  '1907765.jpg' %>
+            <% end %>
+          </div>
+          <p class="user-name">
+            <%= current_user.name %>
+          </p>
         </div>
-        <p class="user-name">
-          <%= current_user.name %>
-        </p>
-      </div>
+      <% end %>
       <ul>
         <li class="sp-nav-item">
-          <%= link_to 'ルーム作成', new_room_path %>
+          <%= link_to(new_room_path) do %>
+            <i class="fas fa-door-open"></i>
+            ルーム作成
+          <% end %>
         </li>
         <li class="sp-nav-item">
-          <i class="fas fa-sign-out-alt icon"></i>
-          <%= link_to 'ログアウト', logout_path, method: :delete %>
+          <%= link_to(logout_path, method: :delete) do %>
+            <i class="fas fa-sign-out-alt icon"></i>
+            ログアウト
+          <% end %>
         </li>
         <li class="sp-nav-item">
-          <i class="fas fa-users-cog icon"></i>
-          <%= link_to 'アカウント編集', edit_user_path(current_user) %>
+          <%= link_to(edit_user_path(current_user)) do %>
+            <i class="fas fa-users-cog icon"></i>
+            ユーザー編集
+          <% end %>
         </li>
         <li class="sp-nav-item">
           <%= link_to '退会', user_path(current_user), method: :delete, class: 'withdrawl-link' %>

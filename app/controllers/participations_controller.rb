@@ -15,7 +15,10 @@ class ParticipationsController < ApplicationController
 
   def destroy
     @participation = Participation.find(params[:id])
+    exit_user = User.find_by(id: @participation.user_id)
     @participation.destroy
     redirect_to root_path
+    exit_notice = ApplicationController.renderer.render partial: 'rooms/exit_notice', locals: { user_name: exit_user.name }
+    ActionCable.server.broadcast "room_channel_#{@participation.room_id}", exit_notice: exit_notice
   end
 end

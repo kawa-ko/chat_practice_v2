@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'participations/index'
-  get 'participations/new'
-  get 'participations/create'
-  get 'participations/destroy'
   mount ActionCable.server => '/cable'
 
   root 'rooms#index'
@@ -11,8 +7,16 @@ Rails.application.routes.draw do
   resources :users
 
   resources :rooms, except: [:index], shallow: true do
+    member do
+      get 'join_confirm', to: 'rooms#join_confirm'
+    end
+
     resources :participations, only: [:index, :create, :destroy]
+    
   end
+
+  get 'create_index', to: 'rooms#create_index'
+  get 'participating_index', to: 'rooms#participating_index'
   get 'msg_destroy_confirm', to: 'messages#destroy_confirm'
   get 'deletemessage/:id', to: 'messages#destroy'
   get 'login', to: 'sessions#new'

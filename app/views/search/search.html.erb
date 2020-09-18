@@ -1,0 +1,32 @@
+<h2 class="index-heading search-heading"><span class="keyword"><%= @keyword %></span>の検索結果</h2>
+
+<div class="search-wrapper">
+    <div class="search-index">
+    	<div class="tabs search-tabs">	    
+            <%= link_to(room_search_path(@keyword), remote: true) do %>
+              <button class="tab show">
+                ルーム
+              </button>
+            <% end %>
+
+            <%= link_to(user_search_path(@keyword), remote: true) do %>
+    	      <button class="tab"> 
+                ユーザー
+              </button>
+            <% end %>
+    	    
+    	    <div class="tab-content">
+    	      <%= render 'layouts/room-index', rooms: @rooms %>
+    	    </div>
+    	</div>
+      </div>
+</div>
+
+<script>
+  $(function(){
+      $('.tab').click(function(){
+          $('.tab').removeClass('show');
+          $(this).addClass('show');
+      });
+  });
+</script>

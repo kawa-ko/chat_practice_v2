@@ -23,6 +23,12 @@
     <nav class="header-nav">
       <ul class="header-nav-list">
         <% if logged_in? %>
+          <%= form_with(url: search_path, local: true, method: :get,class: 'search-box') do |f| %>
+            <%= f.text_field :search , class: 'search-input' %>
+            <button type="submit" name="commit" value="search" aria-hidden="true" class="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          <% end %>
           <li class="header-nav-item">
             <%= link_to 'ルーム作成', new_room_path %>
           </li>
@@ -48,6 +54,12 @@
   </div>
 
   <% if logged_in? %>
+  <%= form_with(url: search_path, local: true, method: :get,class: 'sp-search search-box') do |f| %>
+    <%= f.text_field :search , class: 'search-input' %>
+    <button type="submit" name="commit" value="search" aria-hidden="true" class="search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+  <% end %>
   <div class="sp-hamburger">
     <span class="hamburger-bar"></span>
     <span class="hamburger-bar"></span>

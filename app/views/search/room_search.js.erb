@@ -1,0 +1,4 @@
+$(function(){
+   $('.tab-content').html('<%= escape_javascript(render 'layouts/room-index', rooms: @rooms) %>');
+    $('.tab-content').addClass('show');
+});

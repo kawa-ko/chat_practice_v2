@@ -1,0 +1,4 @@
+$(function(){
+    $('.tab-content').html('<%= escape_javascript(render 'layouts/search_user', users: @users) %>');
+    $('.tab-content').addClass('show');
+})

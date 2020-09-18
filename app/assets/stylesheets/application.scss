@@ -52,8 +52,8 @@
     }
 }
 
-@mixin room_tab{
-    .room-tabs{
+@mixin tab{
+    .tabs{
         position: relative;
         margin-top: 20px;
         .tab{
@@ -256,6 +256,32 @@ a:link,a:visited,a:hover,a:active{
         .header-nav{
             .header-nav-list{
                 list-style: none;
+                .search-box{
+                    position: relative;
+                    background-color: #fff;
+                    border-radius: 20px;
+                    height: 30px;
+                    margin: 0 15px;
+                    display: inline-block;
+                    .search-input{
+                        height: 30px;
+                        width: 150px;
+                        outline: none;
+                        font-size: 1.2rem;
+                        padding: 0 10px;
+                    }
+                    .search-btn{
+                        position: absolute;
+                        top: 50%;
+                        right: 0;
+                        z-index: 140;
+                        transform: translateY(-50%);
+                        font-size: 1.2rem;
+                        color: #ccc;
+                        display: inline-block;
+                        margin-right: 10px;
+                    }
+                }
                 .header-nav-item{
                     padding: 0 15px;
                     margin: 10px 0;
@@ -270,6 +296,9 @@ a:link,a:visited,a:hover,a:active{
                 }
             }
         }
+    }
+    .sp-search{
+        display: none;
     }
     .sp-hamburger{
         display: none;
@@ -642,6 +671,27 @@ a:link,a:visited,a:hover,a:active{
                 }
             }
         }
+        .search-box{
+            display: block;
+            position: absolute;
+            right: 90px;
+            border-radius: 15px;
+            height: 30px;
+            background-color: #fff;
+            .search-input{
+                width: 170px;
+                padding: 0 10px;
+                font-size: 1.2rem;
+                height: 30px;
+                outline: none;
+            }
+            .search-btn{
+                font-size: 1.2rem;
+                color: #ccc;
+                display: inline-block;
+                margin-right: 10px;
+            }
+        }
         .sp-hamburger{
             display: block;
             margin: 10px;
@@ -847,8 +897,9 @@ a:link,a:visited,a:hover,a:active{
     }
     .header{
         .header-top{
+            padding: 15px 5px;
             .header-logo-title{
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
         }
         .header-bottom{
@@ -856,6 +907,18 @@ a:link,a:visited,a:hover,a:active{
                 .header-nav-list{
                     flex-direction: column;
                 }
+            }
+        }
+        .search-box{
+            right: 30px;
+            height: 20px;
+            .search-input{
+                width: 100px;
+                height: 20px;
+                font-size: 1rem;
+            }
+            .search-btn{
+                font-size: 1rem;
             }
         }
         .sp-header-right{
@@ -869,6 +932,25 @@ a:link,a:visited,a:hover,a:active{
                             font-size: 0.8rem;
                         }
                     }
+                }
+            }
+        }
+        .sp-hamburger{
+            width: 20px;
+            height: 20px;
+            right: 5px;
+            top: 50%;
+            margin: 0;
+            transform: translateY(-50%);
+            .hamburger-bar:nth-of-type(2){
+                top: 8px
+            }
+            &.open{
+                .hamburger-bar:nth-of-type(1){
+                    transform: translateY(8px) rotate(45deg);
+                }
+                .hamburger-bar:nth-of-type(3){
+                    transform: translateY(-8px) rotate(-45deg);
                 }
             }
         }

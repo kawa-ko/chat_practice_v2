@@ -1,0 +1,100 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import 'application';
+
+.search-heading{
+    .keyword{
+        padding-right: 10px;
+        color: #90cedd;
+    }
+}
+.search-index{
+    @include tab();
+    padding: 0 20px;
+}
+
+.users-wrapper{
+    padding: 30px;
+    .users-list{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        a{
+            display: block;
+            width: 25%;
+            padding: 30px;
+            .user-card{
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 2px 2px 4px 2px #bbb;
+                padding: 20px;
+                text-align: center;
+                transition: opacity .2s, transform .2s, box-shadow .2s;
+                &:hover{
+                    box-shadow: 3px 3px 5px 3px #ddd;
+                    transform: scale(1.05);
+                    opacity: 0.8;
+                }
+                .user-image{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    margin-bottom: 15px;
+                    object-fit: cover;
+                }
+                .user-name{
+                    font-size: 1.4rem;
+                    margin-bottom: 15px;
+                }
+                .user-prof{
+                    color: #999;
+                    font-size: 0.9rem;
+                    max-height: 80px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        @media screen and (max-width: 1024px){
+            a{
+                padding: 15px;
+                .user-card{
+                    padding: 10px;
+                    .user-name{
+                        font-size: 1rem;
+                    }
+                    .user-prof{
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+        }
+        @media screen and (max-width: 760px){
+            flex-direction: column;
+            a{
+                width: 100%;
+                .user-card{
+                    padding: 15px 0 60px;
+                    .user-image{
+                        float: left;
+                        width: 30%;
+                        padding: 0 calc((30% - 50px)/2);
+                    }
+                    .user-name{
+                        text-align: left;
+                        float: right;
+                        width: 70%;
+                        margin-bottom: 5px;
+                    }
+                    .user-prof{
+                        float: right;
+                        width: 70%;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

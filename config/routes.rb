@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/search'
   mount ActionCable.server => '/cable'
 
   root 'rooms#index'
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
     resources :participations, only: [:index, :create, :destroy]
     
   end
+
+  get 'search', to: 'search#search'
+  get 'room_search', to: 'search#room_search'
+  get 'user_search', to: 'search#user_search'
 
   get 'create_index', to: 'rooms#create_index'
   get 'participating_index', to: 'rooms#participating_index'

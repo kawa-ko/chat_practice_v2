@@ -70,10 +70,14 @@
     padding: 40px 0;
     border-bottom: 1px solid #ccc;
     box-shadow: 10px 0 10px 0 #bbb;
+    @media screen and (max-width: 760px){
+        font-size: 1.7rem;
+        padding: 20px;
+    }
 }
 
 .room-index{
-    @include room-tab();
+    @include tab();
     .room-tabs{
         padding: 30px;
         .tab{

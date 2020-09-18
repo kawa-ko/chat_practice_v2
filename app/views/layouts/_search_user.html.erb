@@ -1,0 +1,21 @@
+<div class="users-wrapper">
+    <ul class="users-list">
+      <%  users.each do |user| %>
+        <%=  link_to(users_path(user)) do %>
+          <li class="user-card clearfix">
+              <% if user.image? %>
+                <%= image_tag user.image.url, class: 'user-image'%>
+              <% else %>
+                <%= image_tag '1907765.jpg', class: 'user-image' %>
+              <% end %>
+
+              <h2 class="user-name"><%= user.name %></h2>
+
+              <% if user.prof? %> 
+                <p class="user-prof"><%= user.prof %></p>
+              <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+</div>

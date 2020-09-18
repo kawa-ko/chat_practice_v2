@@ -1,3 +1,7 @@
+<%= javascript_pack_tag 'flash/flash' %>
 <% flash.each do | message_type, message | %>
-  <div><%= message %></div>
+  <div class="flash">
+    <%= message %>
+    <i class="fas fa-times flash-close"></i>
+  </div>
 <% end %>

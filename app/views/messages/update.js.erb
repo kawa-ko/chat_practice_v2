@@ -1,4 +1,5 @@
 $(function(){
     $('.content').text('<%= escape_javascript(@message.content) %>');
+    $('.message-image').attr('src','<%= @message.image.url %>');
     $('.date').text('<%= @message.updated_at %>')
 });

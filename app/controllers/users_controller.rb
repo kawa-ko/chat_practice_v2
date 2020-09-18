@@ -14,9 +14,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
-    login(@user,@user.password)
-    redirect_to root_path
+    if @user.save!
+      login(@user,@user.password)
+      redirect_to root_path
+      flash[:success] = 'ユーザー登録に成功しました'
+    else
+      flash.now[:false] = 'ユーザー登録に失敗しました'
+      render :new
+    end
   end
 
   def edit
@@ -25,14 +30,24 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to root_url
+    if @user.update(user_params)
+      redirect_to root_url
+      flash[:success] = 'ユーザー情報を更新しました'
+    else
+      render :new
+      flash[:false] = 'ユーザー編集に失敗しました'
+    end
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy!
-    redirect_to root_url
+    if @user.destroy
+      redirect_to root_url
+      flash[:success] = '退会しました'
+    else
+      redirect_back
+      flash[:false] = '退会に失敗しました'
+    end
   end
 
   private

@@ -15,7 +15,8 @@ class MessagesController < ApplicationController
   def update
     @message = Message.find(params[:id])
     if @message.update(message_params)
-      @message
+      flash[:success] = 'メッセージを編集しました'
+      redirect_to room_path(@message.room, anchor: "#{@message.id}")
     end
   end
 

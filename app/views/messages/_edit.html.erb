@@ -4,9 +4,7 @@
         メッセージ編集
       </h2>
       <button class="close-btn">
-        <%= link_to room_path(message.room) do %>
-          <i class="fas fa-times"></i>
-        <% end %>
+        <i class="fas fa-times"></i>
       </button>
       <div class="message-user-icon">
         <% if message.user.image? %>
@@ -18,14 +16,14 @@
           <%= message.user.name %>
         </p>
       </div>
-      <%= form_with(model: message, class: 'edit-form', method: :put) do |f| %>
+      <%= form_with(model: message, class: 'edit-form', method: :put, local: true) do |f| %>
         <div class="input-area">
             <% f.hidden_field :room_id %>		  
             <div class="edit-flex-textarea">
               <div class="edit-textarea-dummy"></div>
               <%= f.text_area :content , class: 'textarea'%>
             </div>
-    		<%= f.file_field :image , class: 'imgarea'%> 
+    		<%= f.file_field :image , class: 'imgarea', id: 'edited_img'%> 
     		<% if message.image? %>
     		  <%= image_tag message.image.url , class: 'img-preview-area img-exist' %>
         <% else %>
@@ -33,10 +31,10 @@
     		<% end %>
         </div>
         <div class="img-input-area">
-          <%= f.label :image, class: 'dummy-file-field' do%>
+          <label for="edited_img" class="dummy-file-field">
             <i class="fas fa-file-image"></i>
             <p>画像</p>
-          <% end %>
+          </label>
           <div class="img-delete-group">
             <%= f.check_box :remove_image , class: 'img-delete-btn' %>
             <p class="img-delete">画像を削除する</p>
@@ -46,62 +44,3 @@
 	  <% end %>
 	</div>
 </div>
-
-<script type="text/javascript">
-$(function(){
-  $('.edit-textarea-dummy').text($('.textarea').val());
-  $('.textarea').on('input',function(){
-    $('.edit-textarea-dummy').text($(this).val());
-  });
-
-  const editedImg = $('.img-preview-area');
-  const editedImgInput = $('.imgarea');
-  const editDeleteBtn = $('.img-delete-btn');
-  const editDeleteArea = $('.img-delete-group');
-   
-  //画像を設定してない状態から、画像を設定する時に削除ボタンを表示するための関数
-  const setDlt = function(){
-       if(editedImgInput.prop('files')[0] === undefined){
-           editDeleteArea.hide();
-       }else{
-           editDeleteArea.show();
-       }
-   }
-
-   //ファイルフィールドのファイルを読み込むためのファンクション
-   const setSrc = function(file){
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function(){
-      const prevImg = reader.result;
-      editedImg.attr('src',prevImg);
-      setDlt();
-    }
-   };
-
-   $('.no-img').hide();
-
-   //ユーザー作成、編集でプレビューされていたプロフィール画像を削除する処理
-   editDeleteBtn.on('change',function(){
-       console.log('unko');
-       if($(this).is(':checked')){
-           editedImg.fadeOut().addClass('no-img');
-       }else{
-           editedImg.fadeIn().removeClass('no-img');
-       }
-   });
-
-   //プロフィール画像のプレビュー処理
-   editedImgInput.on('change',function(e){
-     const file = e.target.files[0];
-     setSrc(file);
-     if(editedImg.hasClass('no-img')){
-       editedImg.fadeIn().removeClass('no-img');
-     }
-   });
-
-   $('.close-btn').click(function(){
-       $('.message-edit-form').fadeOut();
-   });
-});
-</script>

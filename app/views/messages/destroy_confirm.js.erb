@@ -8,4 +8,12 @@ $(function(){
       $('.main').append("<%= escape_javascript(render 'messages/destroy_confirm', message: @message) %>");
       $('.message-destroy-confirmation').fadeIn();
     }
+
+    $('.cancel').click(function(){
+      $('.message-destroy-confirmation').fadeOut(300);
+      setTimeout(function(){
+        $('.message-destroy-confirmation').remove();
+        $('.menu-btn').removeClass('show');
+      },301);
+    });
 });

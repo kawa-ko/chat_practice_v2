@@ -19,11 +19,12 @@
 @mixin modal{
     display: none;
     position: absolute;
-    z-index: 60;
+    z-index: 110;
     top: 0;
     right: 0;
     width: 80%;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     background-color: rgba(0,0,0,0.6);
     .modal-inner{
         position: absolute;
@@ -32,7 +33,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        padding: 20px;text-align: center;
+        padding: 20px;
+        text-align: center;
     }
     @media screen and (max-width: 1024px){
         width: 100%;
@@ -154,6 +156,54 @@ a:link,a:visited,a:hover,a:active{
 //共通ｃｓｓ終わり
 
 //pc用css
+@keyframes flash{
+    0%{
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    15%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    85%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100%{
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+.flash{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px 20px;
+    font-size: 1.5rem;
+    display: block;
+    background-color: #90ddcb;
+    border-radius: 10px;
+    padding: 15px 60px;
+    color: #fff;
+    z-index: 120;
+    box-shadow: 3px 3px 6px 2px #6c998e;
+    animation: flash 4s ease forwards;
+    .flash-close{
+        position: absolute;
+        font-size: 1.4rem;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+}
+
 .header{
     width: 20%;
     background: linear-gradient(45deg, #79ffd2, #91DDC1, #91e1ec, #72b3ff);
@@ -308,6 +358,7 @@ a:link,a:visited,a:hover,a:active{
     
     .message-list{
         position: relative;
+        padding: 120px 50px;
         .notice{
             animation: show 2s ease;
             animation-fill-mode: forwards;
@@ -327,7 +378,6 @@ a:link,a:visited,a:hover,a:active{
         .exit-notice{
             background-color: #b45858;
         }
-        padding: 120px 50px;
         .message-container{
             .message-content{
                 background-color: #fff;
@@ -374,7 +424,7 @@ a:link,a:visited,a:hover,a:active{
                 .message-menu{
                     width: 100%;
                     z-index: 40;
-                    margin-top: 20px;
+                    margin-top: 10px;
                     text-align: right;
                     position: relative;
                     outline: none;

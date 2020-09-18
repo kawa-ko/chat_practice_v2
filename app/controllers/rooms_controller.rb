@@ -28,9 +28,11 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.save
       @participation = current_user.participations.create(room_id: @room.id)
-      redirect_to root_path
+      redirect_to room_path(@room)
+      flash[:success] = 'ルームを作成しました'
     else
       render :new
+      flash[:false] = 'ルームの作成に失敗しました'
     end
   end
 
@@ -48,8 +50,10 @@ class RoomsController < ApplicationController
     else
       if @room.update(room_params)
         redirect_to room_path(@room)
+        flash[:success] = 'ルームを編集しました'
       else
         redirect_back(fallback_location: edit_room_path(@room))
+        flash[:false] = 'ルームの編集に失敗しました'
       end
     end
   end
@@ -61,6 +65,7 @@ class RoomsController < ApplicationController
     else
       @room.destroy
       redirect_to root_path
+      flash[:success] = 'ルームを削除しました'
     end
   end
 

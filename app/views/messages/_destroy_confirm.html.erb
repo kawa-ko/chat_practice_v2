@@ -22,7 +22,7 @@
 	        </div>
        </div>
        <div class="button-group">
-	     <%= link_to 'キャンセル', room_path(message.room), class: 'cancel btn' %>
+	     <button class="cancel btn">キャンセル</button>
          <%= link_to '削除', message_path(message), method: :delete, class: 'delete btn'%>
        </div>
     </div>

@@ -8,6 +8,68 @@ $(function(){
       $('.main').append("<%= escape_javascript(render 'messages/edit', message: @message) %>");
       $('.message-edit-form').fadeIn();
     }
+    
+    console.log($('body').scrollTop());
+    //$('.message-list').css({'position':'fixed'});
+
+    $('.edit-textarea-dummy').text($('.textarea').val());
+    $('.textarea').on('input',function(){
+      $('.edit-textarea-dummy').text($(this).val());
+    });
+  
+    const editedImg = $('.img-preview-area');
+    const editedImgInput = $('.imgarea');
+    const editDeleteBtn = $('.img-delete-btn');
+    const editDeleteArea = $('.img-delete-group');
+     
+    //画像を設定してない状態から、画像を設定する時に削除ボタンを表示するための関数
+    const setDlt = function(){
+        if(editedImgInput.prop('files')[0] === undefined){
+            editDeleteArea.hide();
+        }else{
+            editDeleteArea.show();
+        }
+    }
+  
+    //ファイルフィールドのファイルを読み込むためのファンクション
+    const setSrc = function(file){
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(){
+      const prevImg = reader.result;
+      editedImg.attr('src',prevImg);
+      setDlt();
+      }
+    };
+  
+    $('.no-img').hide();
+  
+    //ユーザー作成、編集でプレビューされていたプロフィール画像を削除する処理
+    editDeleteBtn.on('change',function(){
+        console.log('unko');
+        if($(this).is(':checked')){
+            editedImg.fadeOut().addClass('no-img');
+        }else{
+            editedImg.fadeIn().removeClass('no-img');
+        }
+    });
+  
+    //プロフィール画像のプレビュー処理
+    editedImgInput.on('change',function(e){
+      const file = e.target.files[0];
+      setSrc(file);
+      if(editedImg.hasClass('no-img')){
+        editedImg.fadeIn().removeClass('no-img');
+      }
+    });
+  
+    $('.close-btn').click(function(){
+        $('.message-edit-form').fadeOut(300);
+        $('.menu-btn').removeClass('show');
+        setTimeout(function(){
+            $('.message-edit-form').remove();
+        },301);
+    });
 
     $('.submit-btn').click(function(){
       $('.message-edit-form').fadeOut();

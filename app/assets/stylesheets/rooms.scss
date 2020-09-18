@@ -36,10 +36,17 @@
 @mixin room-card{
     border: none;
     position: relative;
+    cursor: pointer;
     text-align: center;
     box-shadow: 1px 2px 3px 2px #bbb;
     border-radius: 10px;
     overflow: hidden;
+    transition: opacity .3s,transform .3s,box-shadow .3s;
+    &:hover{
+        transform: scale(1.05);
+        opacity: 0.8;
+        box-shadow: 2px 3px 4px 3px #ddd;
+    }
     .image-area{
         height: 100px;
         background-color: #ddd;

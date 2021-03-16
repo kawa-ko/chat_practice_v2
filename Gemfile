@@ -67,6 +67,6 @@ gem 'jquery-rails'
 
 gem 'kaminari'
 
-gem 'fog-aws'
+gem 'fog'
 
 gem 'dotenv-rails'

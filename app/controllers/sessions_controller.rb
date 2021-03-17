@@ -32,8 +32,6 @@ class SessionsController < ApplicationController
     flash[:success] = 'ログアウトしました'
   end
 
-  private
-
   def login(user,password)
     if user && user.authenticate(password)
       session[:user_id] = user.id

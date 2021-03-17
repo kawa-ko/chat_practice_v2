@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
     if @user.activated?
       if login(@user,password)
         if params[:session][:remember_me] == '1'
-          remember(@user)
+          remember_login(@user)
         else
-          forget(@user)
+          forget_login(@user)
         end
         flash[:success] = 'ログインに成功しました。'
         redirect_to root_url

@@ -4,7 +4,7 @@ class AccountActivationsController < ApplicationController
         if user && !user.activated? && user.authenticated?(:activation, params[:id])
             user.update_attribute(:activated, true)
             user.update_attribute(:activated_at, Time.zone.now)
-            login(user, user.password)
+            session[:user_id] = user.id
             flash[:success] = "アカウントが有効化されました。"
             redirect_to user
         else

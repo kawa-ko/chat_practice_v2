@@ -23,7 +23,7 @@ class User < ApplicationRecord
       BCrypt::Password.create(string, cost: cost)
     end
 
-    def User.new_token
+    def new_token
       SecureRandom.urlsafe_base64
     end
 

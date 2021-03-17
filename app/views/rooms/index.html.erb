@@ -3,7 +3,7 @@
 <div class="rooms-wrapper">
     <% if logged_in? %>
       <div class="room-index">
-    	<div class="tabs room-tabs">
+    	  <div class="tabs room-tabs">
             <%= link_to(root_path, remote: true) do %>
     	      <button class="tab all_room show" for="all_room">
               　　ルーム一覧
@@ -25,7 +25,7 @@
     	    <div class="tab-content">
     	      <%= render 'layouts/room-index', rooms: @rooms %>
     	    </div>
-    	</div>
+    	  </div>
       </div>
     <% else %>
       <%= render 'layouts/room-index', rooms: @rooms %>

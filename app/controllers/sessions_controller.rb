@@ -6,17 +6,22 @@ class SessionsController < ApplicationController
     email = params[:session][:email].downcase
     password = params[:session][:password]
     @user = User.find_by(email: email)
-    if login(@user,password)
-      if params[:session][:remember_me] == '1'
-        remember(@user)
+    if @user.activated?
+      if login(@user,password)
+        if params[:session][:remember_me] == '1'
+          remember(@user)
+        else
+          forget(@user)
+        end
+        flash[:success] = 'ログインに成功しました。'
+        redirect_to root_url
       else
-        forget(@user)
+        flash.now[:danger] = 'ログインに失敗しました。'
+        render :new
       end
-      flash[:success] = 'ログインに成功しました。'
-      redirect_to root_url
     else
-      flash.now[:danger] = 'ログインに失敗しました。'
-      render :new
+      flash[:danger] = 'アカウントが有効化されていません'
+      redirect_to root_url
     end
   end
 

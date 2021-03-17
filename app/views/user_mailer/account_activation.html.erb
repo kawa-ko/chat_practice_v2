@@ -1,0 +1,6 @@
+<h1>ChatPractice2</h1>
+
+<p><%= @user.name %>様</p>
+
+<p>ChatPractice2にご登録いただきありがとうございます。下記リンクをクリックしてアカウントを有効化してください。</p>
+<%= link_to "アカウントを有効化する", edit_account_activation_url(@user.activation_token, email: @user.email) %>
